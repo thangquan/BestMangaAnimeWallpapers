@@ -25,6 +25,15 @@ const Home = (props: Props) => {
                 console.log('err', err)
             })
             .finally(() => {})
+        CommonAPIs.getImageByCategory('cry')
+            .then((res) => {
+                console.log('res', res)
+                setData(res)
+            })
+            .catch((err) => {
+                console.log('err', err)
+            })
+            .finally(() => {})
     }, [])
 
     useEffect(() => {
@@ -42,26 +51,11 @@ const Home = (props: Props) => {
         <View style={styles.container}>
             <HeaderNormal />
             <FlatList
-                data={[1, 2, 3, 4, 5, 6, 7, 78, 8, 89, 9]}
+                data={data}
                 renderItem={({ item }) => (
-                    // <FastImage
-                    //     source={{ uri: item }}
-                    //     style={{
-                    //         ...styles.imageItem
-                    //     }}
-                    //     resizeMode='contain'
-                    // />
-                    <AutoHeightImage
-                        width={(Constant.screen.width - 60) / 2}
-                        source={{ uri: 'https://i.waifu.pics/Tj6Wzwo.png' }}
-                        style={{
-                            marginRight: 20,
-                            marginTop: 20,
-                            borderRadius: 5
-                        }}
-                    />
+                    <Image source={{ uri: item?.thumbnail }} style={styles.imageItem} />
                 )}
-                numColumns={2}
+                // numColumns={2}
             />
         </View>
     )

@@ -4,6 +4,7 @@ export default class BaseAPIs {
     static baseURL = Constant.baseURL
 
     static rapidapiURL = 'https://best-manga-anime-wallpapers.p.rapidapi.com/'
+    static waifuURL = 'https://api.waifu.pics'
 
     static getHeadersRapidapi() {
         return {

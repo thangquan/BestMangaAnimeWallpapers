@@ -47,5 +47,6 @@ export default Constant = {
         ddMMHHmm: 'dd/MM HH:mm',
         ddMMyyyyHHmm: 'dd/MM/yyyy HH:mm',
         yyyyMMddHHmm: 'yyyy-MM-dd HH:mm'
-    }
+    },
+    categories: ['waifu', 'neko', 'shinobu', 'megumin']
 }
