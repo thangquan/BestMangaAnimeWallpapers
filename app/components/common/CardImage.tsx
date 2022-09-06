@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, ActivityIndicator } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import Constant from '../home/controller/Constant'
+import Constant from '../../controller/Constant'
 import AutoHeightImage from 'react-native-auto-height-image'
 import FastImage from 'react-native-fast-image'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';

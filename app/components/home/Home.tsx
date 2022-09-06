@@ -1,18 +1,43 @@
 import { FlatList, StyleSheet, Text, View, Image } from 'react-native'
-import React, { useCallback, useEffect, useState } from 'react'
-import Constant from './controller/Constant'
+import React, { useEffect, useState } from 'react'
+import Constant from '../../controller/Constant'
 import HeaderNormal from '../common/HeaderNormal'
-import CommonAPIs from './controller/APIs/CommonAPIs'
-import FastImage from 'react-native-fast-image'
+import CommonAPIs from '../../controller/APIs/CommonAPIs'
 import AutoHeightImage from 'react-native-auto-height-image'
-import FitImage from 'react-native-fit-image'
+import CardImage from '../common/CardImage'
+import ListCategory from './ListCategory'
+
 type Props = {}
+
+const listCategory = [
+    {
+        id: 1,
+        image: 'https://picsum.photos/200/300',
+        title: 'Naruto'
+    },
+    {
+        id: 2,
+        image: 'https://picsum.photos/200/300',
+        title: 'One Piece'
+    },
+    {
+        id: 3,
+        image: 'https://picsum.photos/200/300',
+        title: 'Dragon Ball'
+    },
+    {
+        id: 4,
+        image: 'https://picsum.photos/200/300',
+        title: 'Doraemon'
+    }
+]
 
 const Home = (props: Props) => {
     const [listCharacters, setListCharacters] = useState<any[]>([])
     const [listMangaAnime, setListMangaAnime] = useState<any[]>([])
     const [listPopular, setListPopular] = useState<any[]>([])
     const [data, setData] = useState<any[]>([])
+    const [categoryFocus, setCategoryFocus] = useState<any>()
 
     useEffect(() => {
         CommonAPIs.getAllPopular()
@@ -36,27 +61,15 @@ const Home = (props: Props) => {
             .finally(() => {})
     }, [])
 
-    useEffect(() => {
-        CommonAPIs.getListWallpaperBySlug('aggretsuko-wallpapers')
-            .then((res) => {
-                setData(res)
-            })
-            .catch((err) => {
-                console.log('err', err)
-            })
-            .finally(() => {})
-    }, [])
-
     return (
         <View style={styles.container}>
             <HeaderNormal />
-            <FlatList
-                data={data}
-                renderItem={({ item }) => (
-                    <Image source={{ uri: item?.thumbnail }} style={styles.imageItem} />
-                )}
-                // numColumns={2}
+            <ListCategory
+                data={listCategory}
+                categoryFocus={categoryFocus}
+                setCategoryFocus={setCategoryFocus}
             />
+            {/* <FlatList data={[]} renderItem={({ item }) => <CardImage uri={item} />} /> */}
         </View>
     )
 }
@@ -74,8 +87,6 @@ const styles = StyleSheet.create({
         marginRight: 20,
         marginTop: 20,
         width: (Constant.screen.width - 60) / 2,
-        aspectRatio: 0.5,
-        borderRadius: 5,
-        resizeMode: 'contain'
+        borderRadius: 5
     }
 })
