@@ -48,5 +48,36 @@ export default Constant = {
         ddMMyyyyHHmm: 'dd/MM/yyyy HH:mm',
         yyyyMMddHHmm: 'yyyy-MM-dd HH:mm'
     },
-    categories: ['waifu', 'neko', 'shinobu', 'megumin']
+    categories: [
+        'waifu',
+        'neko',
+        'shinobu',
+        'megumin',
+        'bully',
+        'cuddle',
+        'cry',
+        'hug',
+        'awoo',
+        'kiss',
+        'lick',
+        'pat',
+        'smug',
+        'bonk',
+        'yeet',
+        'blush',
+        'smile',
+        'wave',
+        'highfive',
+        'handhold',
+        'nom',
+        'bite',
+        'glomp',
+        'slap',
+        'kick',
+        'happy',
+        'wink',
+        'poke',
+        'dance',
+        'cringe'
+    ]
 }

@@ -1,65 +1,36 @@
-import { FlatList, StyleSheet, Text, View, Image } from 'react-native'
+import { FlatList, StyleSheet, Text, View, Image, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import Constant from '../../controller/Constant'
 import HeaderNormal from '../common/HeaderNormal'
 import CommonAPIs from '../../controller/APIs/CommonAPIs'
 import AutoHeightImage from 'react-native-auto-height-image'
 import CardImage from '../common/CardImage'
 import ListCategory from './ListCategory'
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
+import Constant from './../../controller/Constant'
+import Loading from './../common/Loading'
 
 type Props = {}
 
-const listCategory = [
-    {
-        id: 1,
-        image: 'https://picsum.photos/200/300',
-        title: 'Naruto'
-    },
-    {
-        id: 2,
-        image: 'https://picsum.photos/200/300',
-        title: 'One Piece'
-    },
-    {
-        id: 3,
-        image: 'https://picsum.photos/200/300',
-        title: 'Dragon Ball'
-    },
-    {
-        id: 4,
-        image: 'https://picsum.photos/200/300',
-        title: 'Doraemon'
-    }
-]
-
 const Home = (props: Props) => {
-    const [listCharacters, setListCharacters] = useState<any[]>([])
-    const [listMangaAnime, setListMangaAnime] = useState<any[]>([])
-    const [listPopular, setListPopular] = useState<any[]>([])
     const [data, setData] = useState<any[]>([])
-    const [categoryFocus, setCategoryFocus] = useState<any>()
+    const [listCategory, setListCategory] = useState<any[]>(Constant.categories)
+    const [categoryFocus, setCategoryFocus] = useState<string>(Constant.categories[0])
+    const [loading, setLoading] = useState<boolean>(false)
 
     useEffect(() => {
-        CommonAPIs.getAllPopular()
+        setLoading(true)
+        CommonAPIs.getImageByCategory(categoryFocus)
             .then((res) => {
-                setListCharacters(res?.characters)
-                setListMangaAnime(res?.manga_anime)
-                setListPopular(res?.popular)
-            })
-            .catch((err) => {
-                console.log('err', err)
-            })
-            .finally(() => {})
-        CommonAPIs.getImageByCategory('cry')
-            .then((res) => {
-                console.log('res', res)
                 setData(res)
+                console.log('rs', res)
             })
             .catch((err) => {
                 console.log('err', err)
             })
-            .finally(() => {})
-    }, [])
+            .finally(() => {
+                setLoading(false)
+            })
+    }, [categoryFocus])
 
     return (
         <View style={styles.container}>
@@ -69,7 +40,15 @@ const Home = (props: Props) => {
                 categoryFocus={categoryFocus}
                 setCategoryFocus={setCategoryFocus}
             />
-            {/* <FlatList data={[]} renderItem={({ item }) => <CardImage uri={item} />} /> */}
+            {loading ? (
+                <Loading />
+            ) : (
+                <FlatList
+                    data={data}
+                    renderItem={({ item }) => <CardImage uri={item} width={(wp(100) - 45) / 2} />}
+                    numColumns={2}
+                />
+            )}
         </View>
     )
 }
