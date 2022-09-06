@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, Text, TouchableOpacity, View, Pressable } from 'react-native'
-import React from 'react'
+import React, { useRef } from 'react'
 import FastImage from 'react-native-fast-image'
 
 interface Props {
@@ -17,14 +17,16 @@ interface Category {
 const colorBr = 'rgba(243, 250, 162, 0.23)'
 
 const ListCategory = ({ data, categoryFocus, setCategoryFocus }: Props) => {
-    const renderItem = ({ item }: { item: Category }) => (
+    const refFlatList = useRef<FlatList>()
+
+    const renderItem = ({ item, index }: { item: Category }) => (
         <Pressable
             style={{
                 ...styles.listCategory,
                 backgroundColor: categoryFocus?.id == item?.id ? '#fcba03' : colorBr
             }}
             onPress={() => {
-                handleOnPressItemCategory(item)
+                handleOnPressItemCategory(item, index)
             }}
         >
             <FastImage
@@ -43,13 +45,17 @@ const ListCategory = ({ data, categoryFocus, setCategoryFocus }: Props) => {
             </Text>
         </Pressable>
     )
-    const handleOnPressItemCategory = (item: Category): void => {
+    const handleOnPressItemCategory = (item: Category, index: number): void => {
         setCategoryFocus(item)
+        refFlatList.current.scrollToIndex({
+            index
+        })
     }
 
     return (
         <View style={styles.container}>
             <FlatList
+                ref={refFlatList}
                 data={data}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
