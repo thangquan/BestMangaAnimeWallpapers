@@ -34,7 +34,10 @@ export default Constant = {
     keys: {
         currentUser: 'currentUser'
     },
-    icons: {},
+    icons: {
+        gifLoading: require('../assets/images/loading.gif'),
+        loading: require('../assets/images/ic_loading.png')
+    },
     fonts: {
         poppinsBold: 'Poppins-Bold',
         poppinsMedium: 'Poppins-Medium',

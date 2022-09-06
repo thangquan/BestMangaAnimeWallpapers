@@ -22,7 +22,6 @@ const Home = (props: Props) => {
         CommonAPIs.getImageByCategory(categoryFocus)
             .then((res) => {
                 setData(res)
-                console.log('rs', res)
             })
             .catch((err) => {
                 console.log('err', err)
