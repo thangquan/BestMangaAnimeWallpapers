@@ -1,6 +1,6 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Constant from './app/components/home/controller/Constant'
+import Constant from './app/controller/Constant'
 import Home from './app/components/home/Home'
 
 const App = () => {
