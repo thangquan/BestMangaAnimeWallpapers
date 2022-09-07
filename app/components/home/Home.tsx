@@ -2,12 +2,12 @@ import { FlatList, StyleSheet, Text, View, Image, ActivityIndicator } from 'reac
 import React, { useEffect, useState } from 'react'
 import HeaderNormal from '../common/HeaderNormal'
 import CommonAPIs from '../../controller/APIs/CommonAPIs'
-import AutoHeightImage from 'react-native-auto-height-image'
 import CardImage from '../common/CardImage'
 import ListCategory from './ListCategory'
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import Constant from './../../controller/Constant'
 import Loading from './../common/Loading'
+import LoadingFooter from '../common/LoadingFooter'
 
 type Props = {}
 
@@ -17,7 +17,17 @@ const Home = (props: Props) => {
     const [categoryFocus, setCategoryFocus] = useState<string>(Constant.categories[0])
     const [loading, setLoading] = useState<boolean>(false)
 
-    useEffect(() => {
+    const onEndReached = (): void => {
+        CommonAPIs.getImageByCategory(categoryFocus)
+            .then((res) => {
+                setData((prev) => [...prev, ...res])
+            })
+            .catch((err) => {
+                console.log('err', err)
+            })
+    }
+
+    const getImageByCategory = (categoryFocus: string): void => {
         setLoading(true)
         CommonAPIs.getImageByCategory(categoryFocus)
             .then((res) => {
@@ -29,6 +39,10 @@ const Home = (props: Props) => {
             .finally(() => {
                 setLoading(false)
             })
+    }
+
+    useEffect(() => {
+        getImageByCategory(categoryFocus)
     }, [categoryFocus])
 
     return (
@@ -46,6 +60,9 @@ const Home = (props: Props) => {
                     data={data}
                     renderItem={({ item }) => <CardImage uri={item} width={(wp(100) - 45) / 2} />}
                     numColumns={2}
+                    showsVerticalScrollIndicator={false}
+                    onEndReached={onEndReached}
+                    ListFooterComponent={() => <LoadingFooter />}
                 />
             )}
         </View>
@@ -59,7 +76,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Constant.color.backgroundColor,
         padding: 20,
-        paddingTop: 0
+        paddingVertical: 0
     },
     imageItem: {
         marginRight: 20,

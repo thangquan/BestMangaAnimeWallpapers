@@ -36,7 +36,9 @@ export default Constant = {
     },
     icons: {
         gifLoading: require('../assets/images/loading.gif'),
-        loading: require('../assets/images/ic_loading.png')
+        loading: require('../assets/images/ic_loading.png'),
+        loadingCute: require('../assets/images/loading_cute.gif'),
+        loadingFooter: require('../assets/images/loading_footer.gif')
     },
     fonts: {
         poppinsBold: 'Poppins-Bold',

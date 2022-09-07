@@ -3,14 +3,10 @@ import React, { useState, useEffect } from 'react'
 import Constant from '../../controller/Constant'
 import AutoHeightImage from 'react-native-auto-height-image'
 import FastImage from 'react-native-fast-image'
-import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp
-} from 'react-native-responsive-screen'
 
 type Props = {
     uri: string
-    width?: number
+    width: number
 }
 
 const CardImage = ({ uri = '', width }: Props) => {

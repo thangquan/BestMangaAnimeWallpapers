@@ -1,12 +1,14 @@
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, ActivityIndicator, Image } from 'react-native'
 import React from 'react'
+import Constant from '../../controller/Constant'
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
 
 type Props = {}
 
 const Loading = (props: Props) => {
     return (
         <View style={styles.loading}>
-            <ActivityIndicator size='large' color='#0000ff' />
+            <Image source={Constant.icons.loadingCute} style={styles.image} />
         </View>
     )
 }
@@ -18,5 +20,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    image: {
+        width: wp(50),
+        height: wp(50),
+        resizeMode: 'contain'
     }
 })
