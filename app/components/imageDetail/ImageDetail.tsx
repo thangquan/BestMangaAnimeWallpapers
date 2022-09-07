@@ -12,6 +12,7 @@ import {
 import { RootRouteProps } from '../navigation/RootNavigation'
 import FooterIcon from './FooterIcon'
 import ImageZoom from 'react-native-image-pan-zoom'
+import ImageViewer from 'react-native-image-zoom-viewer'
 
 type Props = {
     imageUri: string
@@ -25,6 +26,7 @@ const ImageDetail = () => {
         <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>
             <View style={styles.container}>
                 <Header />
+                {/* <ImageViewer imageUrls={[{ url: imageUrl }]} saveToLocalByLongPress={false} /> */}
                 <ImageZoom
                     cropWidth={wp(100)}
                     cropHeight={hp(100)}
