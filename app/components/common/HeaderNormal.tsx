@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     },
     txtHeader: {
         fontSize: 20,
-        fontWeight: 'bold',
+        fontFamily: Constant.fonts.robotoSlabSemiBold,
         color: Constant.color.text
     }
 })

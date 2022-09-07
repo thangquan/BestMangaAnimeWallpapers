@@ -76,6 +76,6 @@ const styles = StyleSheet.create({
     textCategory: {
         color: '#fff',
         fontSize: 16,
-        fontWeight: 'bold'
+        fontFamily: Constant.fonts.robotoSlabSemiBold
     }
 })

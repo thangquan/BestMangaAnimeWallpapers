@@ -36,8 +36,8 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-  <key>NSPhotoLibraryUsageDescription</key>
+	<string/>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) uses library</string>
 	<key>UIAppFonts</key>
 	<array>

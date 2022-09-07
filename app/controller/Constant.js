@@ -47,7 +47,12 @@ export default Constant = {
         poppinsRegular: 'Poppins-Regular',
         poppinsThin: 'Poppins-Thin',
         poppinsLight: 'Poppins-Light',
-        poppinsSemiBold: 'Poppins-SemiBold'
+        poppinsSemiBold: 'Poppins-SemiBold',
+        robotoSlabBold: 'RobotoSlab-Bold',
+        robotoSlabRegular: 'RobotoSlab-Regular',
+        robotoSlabSemiBold: 'RobotoSlab-SemiBold',
+        robotoSlabMedium: 'RobotoSlab-Medium',
+        robotoSlabThin: 'RobotoSlab-Thin'
     },
     dateFormatter: {
         ddMMHHmm: 'dd/MM HH:mm',
