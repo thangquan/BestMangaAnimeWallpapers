@@ -8,17 +8,18 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import Constant from './../../controller/Constant'
 import Loading from './../common/Loading'
 import LoadingFooter from '../common/LoadingFooter'
+import { useDispatch, useSelector } from 'react-redux'
 
 type Props = {}
 
 const Home = (props: Props) => {
     const [data, setData] = useState<any[]>([])
     const [listCategory, setListCategory] = useState<any[]>(Constant.categories)
-    const [categoryFocus, setCategoryFocus] = useState<string>(Constant.categories[0])
     const [loading, setLoading] = useState<boolean>(false)
+    const currentCategoryFocus = useSelector((state) => state.categorySlice?.currentFocused)
 
     const onEndReached = (): void => {
-        CommonAPIs.getImageByCategory(categoryFocus)
+        CommonAPIs.getImageByCategory(currentCategoryFocus)
             .then((res) => {
                 setData((prev) => [...prev, ...res])
             })
@@ -42,18 +43,14 @@ const Home = (props: Props) => {
     }
 
     useEffect(() => {
-        getImageByCategory(categoryFocus)
-    }, [categoryFocus])
+        getImageByCategory(currentCategoryFocus)
+    }, [currentCategoryFocus])
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>
             <View style={styles.container}>
                 <HeaderNormal />
-                <ListCategory
-                    data={listCategory}
-                    categoryFocus={categoryFocus}
-                    setCategoryFocus={setCategoryFocus}
-                />
+                <ListCategory data={listCategory} />
                 {loading ? (
                     <Loading />
                 ) : (

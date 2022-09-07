@@ -1,23 +1,25 @@
 import { FlatList, StyleSheet, Text, TouchableOpacity, View, Pressable } from 'react-native'
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import FastImage from 'react-native-fast-image'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateCurrentFocused } from './../../redux/categorySlice'
 
 interface Props {
     data: Array<string>
-    categoryFocus: string
-    setCategoryFocus: Function
 }
 
 const colorBr = 'rgba(243, 250, 162, 0.23)'
 
-const ListCategory = ({ data, categoryFocus, setCategoryFocus }: Props) => {
+const ListCategory = ({ data }: Props) => {
+    const dispatch = useDispatch()
     const refFlatList = useRef<FlatList>(null)
+    const indexCategoryFocus = useSelector((state) => state.categorySlice.currentIndex)
 
     const renderItem = ({ item, index }: { item: string; index: number }) => (
         <TouchableOpacity
             style={{
                 ...styles.listCategory,
-                backgroundColor: categoryFocus == item ? '#fcba03' : colorBr
+                backgroundColor: indexCategoryFocus == index ? '#fcba03' : colorBr
             }}
             onPress={() => {
                 handleOnPressItemCategory(item, index)
@@ -26,7 +28,7 @@ const ListCategory = ({ data, categoryFocus, setCategoryFocus }: Props) => {
             <Text
                 style={{
                     ...styles.textCategory,
-                    color: categoryFocus == item ? '#000' : '#fff'
+                    color: indexCategoryFocus == index ? '#000' : '#fff'
                 }}
             >
                 {item}
@@ -35,7 +37,15 @@ const ListCategory = ({ data, categoryFocus, setCategoryFocus }: Props) => {
     )
 
     const handleOnPressItemCategory = (item: string, index: number): void => {
-        setCategoryFocus(item)
+        dispatch(
+            updateCurrentFocused({
+                data: item,
+                index
+            })
+        )
+    }
+
+    const handleOnScrollToItem = (index) => {
         if (refFlatList.current) {
             refFlatList.current.scrollToIndex({
                 index
@@ -43,6 +53,9 @@ const ListCategory = ({ data, categoryFocus, setCategoryFocus }: Props) => {
         }
     }
 
+    useEffect(() => {
+        handleOnScrollToItem(indexCategoryFocus)
+    }, [indexCategoryFocus])
     return (
         <View style={styles.container}>
             <FlatList

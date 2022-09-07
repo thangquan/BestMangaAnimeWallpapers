@@ -1,17 +1,51 @@
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Constant from './../../controller/Constant'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateCurrentFocused } from './../../redux/categorySlice'
+import { useNavigation, DrawerActions } from '@react-navigation/native'
 
 type Props = {}
 
 const DrawerContent = (props: Props) => {
+    const dispatch = useDispatch()
+    const navigation = useNavigation()
+    const currentCategoryFocus = useSelector((state) => state.categorySlice?.currentFocused)
+
     const renderItem = ({ item, index }: { item: string; index: number }) => {
         return (
-            <TouchableOpacity style={styles.itemCategory}>
-                <Text style={styles.textTitleCategory}>{item}</Text>
+            <TouchableOpacity
+                style={{
+                    ...styles.itemCategory,
+                    backgroundColor: currentCategoryFocus == item ? Constant.color.yellow : null
+                }}
+                onPress={() => {
+                    handleOnPressItemCategory({
+                        data: item,
+                        index
+                    })
+                }}
+            >
+                <Text
+                    style={{
+                        ...styles.textTitleCategory,
+                        color:
+                            currentCategoryFocus == item
+                                ? Constant.color.backgroundColor
+                                : Constant.color.text
+                    }}
+                >
+                    {item}
+                </Text>
             </TouchableOpacity>
         )
     }
+
+    const handleOnPressItemCategory = (item) => {
+        navigation.dispatch(DrawerActions.toggleDrawer())
+        dispatch(updateCurrentFocused(item))
+    }
+
     return (
         <View style={styles.drawerContent}>
             <Text style={styles.title}>Waifu Pictures</Text>
