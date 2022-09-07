@@ -1,10 +1,12 @@
-import { Alert, Pressable, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { Alert, Pressable, StyleSheet, Text, View, TouchableOpacity, Platform } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Constant from '../../controller/Constant'
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import RNProgressHud from 'progress-hud'
 import RNFetchBlob from 'rn-fetch-blob'
+import Util from '../../controller/Util'
+import CameraRoll from '@react-native-community/cameraroll'
 
 type Props = {
     imageUrl: string
@@ -45,41 +47,48 @@ const FooterIcon = ({ imageUrl }: Props) => {
         }
     }
 
-    const getExtention = (filename: string) => {
+    const getExtension = (filename: string) => {
         // To get the file extension
         return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined
     }
 
-    const handleOnDownloadImage = (): void => {
+    const handleOnDownloadImage = async (): Promise<void> => {
+        let checkPermissions = await Util.hasLibraryPermission()
+        if (!checkPermissions) {
+            return
+        }
+        if (Util.isIOS()) {
+            CameraRoll.save(imageUrl, { type: 'photo' }).then((onfulfilled) => {
+                handleOnDownloadImageSuccess()
+            })
+            return
+        }
         const { config, fs } = RNFetchBlob
         let PictureDir = fs.dirs.PictureDir
-        let ext: any = getExtention(imageUrl)
+        let ext: any = getExtension(imageUrl)
         ext = '.' + ext[0]
         let options = {
             fileCache: true,
-            useDownloadManager: true,
-            notification: true,
-            path:
-                PictureDir +
-                '/image_' +
-                Math.floor(new Date().getTime() + new Date().getSeconds() / 2) +
-                ext,
-            description: 'Image'
+            addAndroidDownloads: {
+                useDownloadManager: true,
+                notification: true,
+                path:
+                    PictureDir +
+                    '/image_' +
+                    Math.floor(new Date().getTime() + new Date().getSeconds() / 2) +
+                    ext,
+                description: 'Image'
+            }
         }
         config(options)
             .fetch('GET', imageUrl)
             .then((res: any) => {
-                console.log('res -> ', JSON.stringify(res))
                 handleOnDownloadImageSuccess()
             })
     }
 
-    const handleOnDownloadImageSuccess = () => {
-        RNProgressHud.showSuccessWithStatus('Downloaded Successfully.')
-        let sub = setTimeout(() => {
-            RNProgressHud.dismiss()
-        }, 700)
-        return sub
+    const handleOnDownloadImageSuccess = (): void => {
+        Util.showAlertSuccess('Downloaded Successfully.')
     }
 
     return (

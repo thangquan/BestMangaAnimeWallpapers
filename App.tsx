@@ -4,11 +4,13 @@ import Constant from './app/controller/Constant'
 import Home from './app/components/home/Home'
 import { NavigationContainer } from '@react-navigation/native'
 import RootNavigation from './app/components/navigation/RootNavigation'
+import Toast from 'react-native-toast-message'
 
 const App = () => {
     return (
         <NavigationContainer>
             <RootNavigation />
+            <Toast />
         </NavigationContainer>
     )
 }
