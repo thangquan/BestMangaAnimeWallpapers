@@ -11,7 +11,8 @@ export default Constant = {
         TabBarNavigation: 'TabBarNavigation',
         Home: 'Home',
         RootNavigation: 'RootNavigation',
-        ImageDetail: 'ImageDetail'
+        ImageDetail: 'ImageDetail',
+        DrawerNavigation: 'DrawerNavigation'
     },
     color: {
         green: '#3FC44E',

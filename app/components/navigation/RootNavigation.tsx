@@ -6,11 +6,12 @@ import Home from '../home/Home'
 import Constant from '../../controller/Constant'
 import ImageDetail from '../imageDetail/ImageDetail'
 import { RouteProp } from '@react-navigation/native'
+import DrawerNavigation from './DrawerNavigation'
 
 type Props = {}
 
 export type RootStackParamList = {
-    Home: undefined
+    DrawerNavigation: undefined
     ImageDetail: { imageUrl: '' }
 }
 
@@ -28,7 +29,10 @@ const RootNavigation = (props: Props) => {
                 headerShown: false
             }}
         >
-            <Stack.Screen name={Constant.screenName.Home} component={Home} />
+            <Stack.Screen
+                name={Constant.screenName.DrawerNavigation}
+                component={DrawerNavigation}
+            />
             <Stack.Screen name={Constant.screenName.ImageDetail} component={ImageDetail} />
         </Stack.Navigator>
     )
