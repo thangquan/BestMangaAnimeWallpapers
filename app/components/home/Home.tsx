@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View, Image, ActivityIndicator } from 'react-native'
+import { FlatList, StyleSheet, Text, View, Image, SafeAreaView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import HeaderNormal from '../common/HeaderNormal'
 import CommonAPIs from '../../controller/APIs/CommonAPIs'
@@ -46,7 +46,7 @@ const Home = (props: Props) => {
     }, [categoryFocus])
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <HeaderNormal />
             <ListCategory
                 data={listCategory}
@@ -65,7 +65,7 @@ const Home = (props: Props) => {
                     ListFooterComponent={() => <LoadingFooter />}
                 />
             )}
-        </View>
+        </SafeAreaView>
     )
 }
 

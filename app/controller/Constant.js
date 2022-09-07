@@ -10,7 +10,8 @@ export default Constant = {
     screenName: {
         TabBarNavigation: 'TabBarNavigation',
         Home: 'Home',
-        RootNavigation: 'RootNavigation'
+        RootNavigation: 'RootNavigation',
+        ImageDetail: 'ImageDetail'
     },
     color: {
         green: '#3FC44E',
