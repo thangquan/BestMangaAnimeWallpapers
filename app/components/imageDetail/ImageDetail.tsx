@@ -38,7 +38,7 @@ const ImageDetail = () => {
                         style={styles.image}
                     />
                 </ImageZoom>
-                <FooterIcon />
+                <FooterIcon imageUrl={imageUrl} />
             </View>
         </SafeAreaView>
     )

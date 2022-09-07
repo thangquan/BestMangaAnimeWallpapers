@@ -1,10 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Alert, Pressable, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Constant from '../../controller/Constant'
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
+import RNProgressHud from 'progress-hud'
+import RNFetchBlob from 'rn-fetch-blob'
 
-type Props = {}
+type Props = {
+    imageUrl: string
+}
 
 const listIcon = [
     {
@@ -29,11 +33,65 @@ const listIcon = [
     }
 ]
 
-const FooterIcon = (props: Props) => {
+const FooterIcon = ({ imageUrl }: Props) => {
+    const handleOnClickItem = (type: string): void => {
+        switch (type) {
+            case 'download':
+                handleOnDownloadImage()
+                break
+
+            default:
+                break
+        }
+    }
+
+    const getExtention = (filename: string) => {
+        // To get the file extension
+        return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined
+    }
+
+    const handleOnDownloadImage = (): void => {
+        const { config, fs } = RNFetchBlob
+        let PictureDir = fs.dirs.PictureDir
+        let ext: any = getExtention(imageUrl)
+        ext = '.' + ext[0]
+        let options = {
+            fileCache: true,
+            useDownloadManager: true,
+            notification: true,
+            path:
+                PictureDir +
+                '/image_' +
+                Math.floor(new Date().getTime() + new Date().getSeconds() / 2) +
+                ext,
+            description: 'Image'
+        }
+        config(options)
+            .fetch('GET', imageUrl)
+            .then((res: any) => {
+                console.log('res -> ', JSON.stringify(res))
+                handleOnDownloadImageSuccess()
+            })
+    }
+
+    const handleOnDownloadImageSuccess = () => {
+        RNProgressHud.showSuccessWithStatus('Downloaded Successfully.')
+        let sub = setTimeout(() => {
+            RNProgressHud.dismiss()
+        }, 700)
+        return sub
+    }
+
     return (
         <View style={styles.footer}>
             {listIcon.map((icon) => (
-                <View style={styles.viewItem} key={icon.type}>
+                <TouchableOpacity
+                    style={styles.viewItem}
+                    key={icon.type}
+                    onPress={() => {
+                        handleOnClickItem(icon.type)
+                    }}
+                >
                     <View style={styles.item}>
                         <Icon
                             name={icon.iconName}
@@ -43,7 +101,7 @@ const FooterIcon = (props: Props) => {
                         />
                     </View>
                     <Text style={styles.title}>{icon.title}</Text>
-                </View>
+                </TouchableOpacity>
             ))}
         </View>
     )
