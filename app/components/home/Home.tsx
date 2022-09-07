@@ -46,25 +46,29 @@ const Home = (props: Props) => {
     }, [categoryFocus])
 
     return (
-        <SafeAreaView style={styles.container}>
-            <HeaderNormal />
-            <ListCategory
-                data={listCategory}
-                categoryFocus={categoryFocus}
-                setCategoryFocus={setCategoryFocus}
-            />
-            {loading ? (
-                <Loading />
-            ) : (
-                <FlatList
-                    data={data}
-                    renderItem={({ item }) => <CardImage uri={item} width={(wp(100) - 45) / 2} />}
-                    numColumns={2}
-                    showsVerticalScrollIndicator={false}
-                    onEndReached={onEndReached}
-                    ListFooterComponent={() => <LoadingFooter />}
+        <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>
+            <View style={styles.container}>
+                <HeaderNormal />
+                <ListCategory
+                    data={listCategory}
+                    categoryFocus={categoryFocus}
+                    setCategoryFocus={setCategoryFocus}
                 />
-            )}
+                {loading ? (
+                    <Loading />
+                ) : (
+                    <FlatList
+                        data={data}
+                        renderItem={({ item }) => (
+                            <CardImage uri={item} width={(wp(100) - 45) / 2} />
+                        )}
+                        numColumns={2}
+                        showsVerticalScrollIndicator={false}
+                        onEndReached={onEndReached}
+                        ListFooterComponent={() => <LoadingFooter />}
+                    />
+                )}
+            </View>
         </SafeAreaView>
     )
 }
@@ -75,7 +79,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Constant.color.backgroundColor,
-        padding: 20,
+        paddingHorizontal: 20,
         paddingVertical: 0
     },
     imageItem: {

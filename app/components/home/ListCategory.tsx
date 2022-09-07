@@ -11,9 +11,9 @@ interface Props {
 const colorBr = 'rgba(243, 250, 162, 0.23)'
 
 const ListCategory = ({ data, categoryFocus, setCategoryFocus }: Props) => {
-    const refFlatList = useRef<FlatList>()
+    const refFlatList = useRef<FlatList>(null)
 
-    const renderItem = ({ item, index }: { item: string }) => (
+    const renderItem = ({ item, index }: { item: string; index: number }) => (
         <TouchableOpacity
             style={{
                 ...styles.listCategory,
@@ -33,11 +33,14 @@ const ListCategory = ({ data, categoryFocus, setCategoryFocus }: Props) => {
             </Text>
         </TouchableOpacity>
     )
+
     const handleOnPressItemCategory = (item: string, index: number): void => {
         setCategoryFocus(item)
-        refFlatList.current.scrollToIndex({
-            index
-        })
+        if (refFlatList.current) {
+            refFlatList.current.scrollToIndex({
+                index
+            })
+        }
     }
 
     return (
@@ -48,6 +51,7 @@ const ListCategory = ({ data, categoryFocus, setCategoryFocus }: Props) => {
                 renderItem={renderItem}
                 keyExtractor={(item) => item}
                 horizontal
+                showsHorizontalScrollIndicator={false}
             />
         </View>
     )

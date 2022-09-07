@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, Image, ActivityIndicator, ImageBackground } from 'react-native'
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Constant from '../../controller/Constant'
-import AutoHeightImage from 'react-native-auto-height-image'
 import FastImage from 'react-native-fast-image'
+import { StackActions, useNavigation } from '@react-navigation/native'
 
 type Props = {
     uri: string
@@ -10,10 +10,19 @@ type Props = {
 }
 
 const CardImage = ({ uri = '', width }: Props) => {
+    const navigation = useNavigation()
     const [loading, setLoading] = useState<boolean>(true)
 
+    const handleShowImageDetail = (): void => {
+        navigation.dispatch(
+            StackActions.push(Constant.screenName.ImageDetail, {
+                imageUrl: uri
+            })
+        )
+    }
+
     return (
-        <View>
+        <Pressable disabled={loading} onPress={handleShowImageDetail}>
             {loading && (
                 <Image
                     source={Constant.icons.loading}
@@ -27,7 +36,7 @@ const CardImage = ({ uri = '', width }: Props) => {
                     setLoading(false)
                 }}
             />
-        </View>
+        </Pressable>
     )
 }
 

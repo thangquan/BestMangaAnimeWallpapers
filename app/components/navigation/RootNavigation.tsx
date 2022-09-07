@@ -5,8 +5,19 @@ import { StackActionType } from '@react-navigation/native'
 import Home from '../home/Home'
 import Constant from '../../controller/Constant'
 import ImageDetail from '../imageDetail/ImageDetail'
+import { RouteProp } from '@react-navigation/native'
 
 type Props = {}
+
+export type RootStackParamList = {
+    Home: undefined
+    ImageDetail: { imageUrl: '' }
+}
+
+export type RootRouteProps<RouteName extends keyof RootStackParamList> = RouteProp<
+    RootStackParamList,
+    RouteName
+>
 
 const Stack = createNativeStackNavigator()
 
