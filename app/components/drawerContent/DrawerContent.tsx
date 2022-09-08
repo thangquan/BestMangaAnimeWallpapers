@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, SafeAreaView } from 'react-native'
 import React from 'react'
 import Constant from './../../controller/Constant'
 import { useDispatch, useSelector } from 'react-redux'
@@ -48,15 +48,22 @@ const DrawerContent = (props: Props) => {
     }
 
     return (
-        <View style={styles.drawerContent}>
-            <Text style={styles.title}>Waifu Pictures</Text>
-            <FlatList
-                data={Constant.categories}
-                keyExtractor={(item) => item}
-                renderItem={renderItem}
-                showsVerticalScrollIndicator={false}
-            />
-        </View>
+        <SafeAreaView
+            style={{
+                flex: 1,
+                backgroundColor: Constant.color.backgroundColor
+            }}
+        >
+            <View style={styles.drawerContent}>
+                <Text style={styles.title}>Waifu Pictures</Text>
+                <FlatList
+                    data={Constant.categories}
+                    keyExtractor={(item) => item}
+                    renderItem={renderItem}
+                    showsVerticalScrollIndicator={false}
+                />
+            </View>
+        </SafeAreaView>
     )
 }
 
