@@ -27,12 +27,12 @@ const listIcon = [
         iconName: 'image-outline',
         type: 'image',
         title: 'Set'
-    },
-    {
-        iconName: 'information-circle-outline',
-        type: 'info',
-        title: 'Info'
     }
+    // {
+    //     iconName: 'information-circle-outline',
+    //     type: 'info',
+    //     title: 'Info'
+    // }
 ]
 
 const FooterIcon = ({ imageUrl }: Props) => {
@@ -41,15 +41,15 @@ const FooterIcon = ({ imageUrl }: Props) => {
             case 'download':
                 handleOnDownloadImage()
                 break
-
+            case 'image':
+                handleOnSetWallpaperImage()
+                break
+            case 'heart':
+                handleOnSetWallpaperImage()
+                break
             default:
                 break
         }
-    }
-
-    const getExtension = (filename: string) => {
-        // To get the file extension
-        return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined
     }
 
     const handleOnDownloadImage = async (): Promise<void> => {
@@ -65,7 +65,7 @@ const FooterIcon = ({ imageUrl }: Props) => {
         }
         const { config, fs } = RNFetchBlob
         let PictureDir = fs.dirs.PictureDir
-        let ext: any = getExtension(imageUrl)
+        let ext: any = Util.getExtensionFile(imageUrl)
         ext = '.' + ext[0]
         let options = {
             fileCache: true,
@@ -91,10 +91,19 @@ const FooterIcon = ({ imageUrl }: Props) => {
         Util.showAlertSuccess('Downloaded Successfully.')
     }
 
+    const handleOnSetWallpaperImage = (): number => {
+        RNProgressHud.showInfoWithStatus('Feature in development!', 1)
+        const sub = setTimeout(() => {
+            RNProgressHud.dismiss()
+        }, 700)
+        return sub
+    }
+
     return (
         <View style={styles.footer}>
             {listIcon.map((icon) => (
                 <TouchableOpacity
+                    activeOpacity={0.8}
                     style={styles.viewItem}
                     key={icon.type}
                     onPress={() => {

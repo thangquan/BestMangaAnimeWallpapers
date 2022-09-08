@@ -61,4 +61,8 @@ export default class Util {
         ])
         return false
     }
+
+    static getExtensionFile = (filename) => {
+        return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined
+    }
 }
