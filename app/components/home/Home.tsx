@@ -16,7 +16,7 @@ const Home = (props: Props) => {
     const [data, setData] = useState<any[]>([])
     const [listCategory, setListCategory] = useState<any[]>(Constant.categories)
     const [loading, setLoading] = useState<boolean>(false)
-    const currentCategoryFocus = useSelector((state) => state.categorySlice?.currentFocused)
+    const currentCategoryFocus = useSelector((state: any) => state.categorySlice?.currentFocused)
 
     const onEndReached = (): void => {
         CommonAPIs.getImageByCategory(currentCategoryFocus)

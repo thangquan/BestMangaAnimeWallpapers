@@ -10,14 +10,15 @@ type Props = {}
 const DrawerContent = (props: Props) => {
     const dispatch = useDispatch()
     const navigation = useNavigation()
-    const currentCategoryFocus = useSelector((state) => state.categorySlice?.currentFocused)
+    const currentCategoryFocus = useSelector((state: any) => state.categorySlice?.currentFocused)
 
     const renderItem = ({ item, index }: { item: string; index: number }) => {
         return (
             <TouchableOpacity
                 style={{
                     ...styles.itemCategory,
-                    backgroundColor: currentCategoryFocus == item ? Constant.color.yellow : null
+                    backgroundColor:
+                        currentCategoryFocus == item ? Constant.color.yellow : 'transparent'
                 }}
                 onPress={() => {
                     handleOnPressItemCategory({
@@ -41,7 +42,7 @@ const DrawerContent = (props: Props) => {
         )
     }
 
-    const handleOnPressItemCategory = (item) => {
+    const handleOnPressItemCategory = (item: object) => {
         navigation.dispatch(DrawerActions.toggleDrawer())
         dispatch(updateCurrentFocused(item))
     }

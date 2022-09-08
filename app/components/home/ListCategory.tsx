@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from 'react'
 import FastImage from 'react-native-fast-image'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateCurrentFocused } from './../../redux/categorySlice'
+import Constant from '../../controller/Constant'
 
 interface Props {
     data: Array<string>
@@ -13,7 +14,7 @@ const colorBr = 'rgba(243, 250, 162, 0.23)'
 const ListCategory = ({ data }: Props) => {
     const dispatch = useDispatch()
     const refFlatList = useRef<FlatList>(null)
-    const indexCategoryFocus = useSelector((state) => state.categorySlice.currentIndex)
+    const indexCategoryFocus = useSelector((state: any) => state.categorySlice.currentIndex)
 
     const renderItem = ({ item, index }: { item: string; index: number }) => (
         <TouchableOpacity
@@ -45,7 +46,7 @@ const ListCategory = ({ data }: Props) => {
         )
     }
 
-    const handleOnScrollToItem = (index) => {
+    const handleOnScrollToItem = (index: number) => {
         if (refFlatList.current) {
             refFlatList.current.scrollToIndex({
                 index
