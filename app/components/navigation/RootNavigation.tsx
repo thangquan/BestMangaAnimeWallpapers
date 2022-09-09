@@ -10,6 +10,7 @@ import { RouteProp } from '@react-navigation/native'
 import DrawerNavigation from './DrawerNavigation'
 import Privacy from '../privacy/Privacy'
 import TermsPage from '../termsPage/TermsPage'
+import Community from '../community/Community'
 
 type Props = {}
 
@@ -33,6 +34,7 @@ const RootNavigation = (props: Props) => {
                 screenOptions={{
                     headerShown: false
                 }}
+                initialRouteName={'Community'}
             >
                 <Stack.Screen
                     name={Constant.screenName.DrawerNavigation}
@@ -41,6 +43,7 @@ const RootNavigation = (props: Props) => {
                 <Stack.Screen name={Constant.screenName.ImageDetail} component={ImageDetail} />
                 <Stack.Screen name={Constant.screenName.Privacy} component={Privacy} />
                 <Stack.Screen name={Constant.screenName.TermsPage} component={TermsPage} />
+                <Stack.Screen name={Constant.screenName.Community} component={Community} />
             </Stack.Navigator>
         </NavigationContainer>
     )

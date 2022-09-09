@@ -16,7 +16,8 @@ export default Constant = {
         ImageDetail: 'ImageDetail',
         DrawerNavigation: 'DrawerNavigation',
         Privacy: 'Privacy',
-        TermsPage: 'TermsPage'
+        TermsPage: 'TermsPage',
+        Community: 'Community'
     },
     color: {
         green: '#3FC44E',
@@ -32,9 +33,11 @@ export default Constant = {
         placeholder: '#E2E2E2',
         yellow: '#FFB02A',
         backgroundColor: '#141416',
+        postBackgroundColor: '#222333',
+        blackText: '#141416',
         whiteText: '#ffffff',
         whiteBackground: '#ffffff',
-        heart: '#ad1c2a',
+        heart: '#fc6157',
         grayBG: '#2E2E2E'
     },
     keys: {
