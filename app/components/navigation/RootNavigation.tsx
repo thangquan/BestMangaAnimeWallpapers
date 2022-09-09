@@ -8,12 +8,15 @@ import Constant from '../../controller/Constant'
 import ImageDetail from '../imageDetail/ImageDetail'
 import { RouteProp } from '@react-navigation/native'
 import DrawerNavigation from './DrawerNavigation'
+import Privacy from '../privacy/Privacy'
+import TermsPage from '../termsPage/TermsPage'
 
 type Props = {}
 
 export type RootStackParamList = {
     DrawerNavigation: undefined
     ImageDetail: { imageUrl: '' }
+    Privacy: undefined
 }
 
 export type RootRouteProps<RouteName extends keyof RootStackParamList> = RouteProp<
@@ -36,6 +39,8 @@ const RootNavigation = (props: Props) => {
                     component={DrawerNavigation}
                 />
                 <Stack.Screen name={Constant.screenName.ImageDetail} component={ImageDetail} />
+                <Stack.Screen name={Constant.screenName.Privacy} component={Privacy} />
+                <Stack.Screen name={Constant.screenName.TermsPage} component={TermsPage} />
             </Stack.Navigator>
         </NavigationContainer>
     )

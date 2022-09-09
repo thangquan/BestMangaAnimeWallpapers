@@ -3,6 +3,8 @@ import { Dimensions } from 'react-native'
 
 export default Constant = {
     baseURL: 'https://best-manga-anime-wallpapers.p.rapidapi.com/',
+    privacyURL: 'pages.flycricket.io/waifu-pictures-0/privacy.html ',
+    termsPageURL: 'pages.flycricket.io/waifu-pictures-0/terms.html ',
     screen: {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height
@@ -12,7 +14,9 @@ export default Constant = {
         Home: 'Home',
         RootNavigation: 'RootNavigation',
         ImageDetail: 'ImageDetail',
-        DrawerNavigation: 'DrawerNavigation'
+        DrawerNavigation: 'DrawerNavigation',
+        Privacy: 'Privacy',
+        TermsPage: 'TermsPage'
     },
     color: {
         green: '#3FC44E',

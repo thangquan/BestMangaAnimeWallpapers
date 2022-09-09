@@ -3,7 +3,12 @@ import React from 'react'
 import Constant from './../../controller/Constant'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateCurrentFocused } from './../../redux/categorySlice'
-import { useNavigation, DrawerActions } from '@react-navigation/native'
+import {
+    useNavigation,
+    DrawerActions,
+    NavigationProp,
+    StackActions
+} from '@react-navigation/native'
 
 type Props = {}
 
@@ -63,6 +68,27 @@ const DrawerContent = (props: Props) => {
                     showsVerticalScrollIndicator={false}
                 />
             </View>
+            <View style={styles.privacy}>
+                <TouchableOpacity
+                    style={styles.btnPrivacy}
+                    activeOpacity={0.6}
+                    onPress={(): void => {
+                        navigation.navigate(Constant.screenName.Privacy)
+                    }}
+                >
+                    <Text style={styles.textPrivacy}>Privacy Policy</Text>
+                </TouchableOpacity>
+                <View style={styles.driver} />
+                <TouchableOpacity
+                    style={styles.btnPrivacy}
+                    activeOpacity={0.6}
+                    onPress={(): void => {
+                        navigation.navigate(Constant.screenName.TermsPage)
+                    }}
+                >
+                    <Text style={styles.textPrivacy}>Terms & Conditions</Text>
+                </TouchableOpacity>
+            </View>
         </SafeAreaView>
     )
 }
@@ -94,5 +120,22 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: Constant.color.text,
         fontFamily: Constant.fonts.robotoSlabSemiBold
+    },
+    privacy: {
+        marginHorizontal: 20,
+        paddingVertical: 10
+    },
+    btnPrivacy: {
+        paddingVertical: 10,
+        paddingHorizontal: 10
+    },
+    textPrivacy: {
+        color: Constant.color.text,
+        fontFamily: Constant.fonts.robotoSlabRegular
+    },
+    driver: {
+        height: 0.5,
+        marginHorizontal: 10,
+        backgroundColor: Constant.color.text
     }
 })
