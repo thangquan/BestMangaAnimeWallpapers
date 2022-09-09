@@ -151,3 +151,5 @@ ios/Podfile.lock
 .env
 .env.dev
 .env.production
+
+*.keystore

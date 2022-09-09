@@ -32,7 +32,7 @@ const ImageDetail = () => {
                     imageWidth={wp(100)}
                     imageHeight={hp(100)}
                 >
-                    <FastImage
+                    <Image
                         source={{
                             uri: imageUrl
                         }}
@@ -45,7 +45,7 @@ const ImageDetail = () => {
     )
 }
 
-export default ImageDetail
+export default React.memo(ImageDetail)
 
 const styles = StyleSheet.create({
     container: {
