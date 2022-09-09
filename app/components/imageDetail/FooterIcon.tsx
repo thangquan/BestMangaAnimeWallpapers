@@ -28,11 +28,6 @@ const listIcon = [
         type: 'image',
         title: 'Set'
     }
-    // {
-    //     iconName: 'information-circle-outline',
-    //     type: 'info',
-    //     title: 'Info'
-    // }
 ]
 
 const FooterIcon = ({ imageUrl }: Props) => {

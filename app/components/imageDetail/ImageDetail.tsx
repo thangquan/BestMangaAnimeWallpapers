@@ -26,14 +26,13 @@ const ImageDetail = () => {
         <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>
             <View style={styles.container}>
                 <Header />
-                {/* <ImageViewer imageUrls={[{ url: imageUrl }]} saveToLocalByLongPress={false} /> */}
                 <ImageZoom
                     cropWidth={wp(100)}
                     cropHeight={hp(100)}
                     imageWidth={wp(100)}
                     imageHeight={hp(100)}
                 >
-                    <Image
+                    <FastImage
                         source={{
                             uri: imageUrl
                         }}
