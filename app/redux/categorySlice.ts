@@ -1,5 +1,5 @@
 import { createSlice, current } from '@reduxjs/toolkit'
-import Constant from './../controller/Constant'
+import Constant from '../controller/Constant'
 
 const categorySlice = createSlice({
     name: 'categorySlice',

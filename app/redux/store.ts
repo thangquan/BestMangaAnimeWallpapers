@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import categorySlice from './categorySlice'
+import userSlice from './userSlice'
+
 const rootReducer = {
-    categorySlice
+    categorySlice,
+    userSlice
 }
 
 const store = configureStore({
