@@ -17,6 +17,7 @@ const TabBarNavigation = () => {
                 borderTopWidth: 0.5,
                 borderColor: Constant.color.gray
             }}
+            initialRouteName={Constant.screenName.Community}
             screenOptions={({ route }) => ({
                 headerShown: false,
 

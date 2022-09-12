@@ -6,20 +6,43 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { Input } from 'react-native-elements'
 import ButtonNormal from '../createPost/ButtonNormal'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateStateModalLogin, updateStateModalRegister } from '../../redux/userSlice'
+import {
+    updateCurrentUser,
+    updateStateModalLogin,
+    updateStateModalRegister
+} from '../../redux/userSlice'
+import { loginWithEmailAndPassword } from '../../redux/thunks/authThunk'
+import auth from '@react-native-firebase/auth'
+import Util from '../../controller/Util'
+import UserModel from '../../model/UserModel'
+import RNProgressHud from 'progress-hud'
 
 type Props = {}
 
 const LoginModal = ({}: Props) => {
     const dispatch = useDispatch()
-    const isVisible = useSelector((state): any => state.userSlice?.modalLogin)
+    const isVisible = useSelector((state: any) => state.userSlice.modalLogin)
     const [secureTextEntry, setSecureTextEntry] = useState(true)
+    const [email, setEmail] = useState<string>('cu@cai.nho')
+    const [password, setPassword] = useState<string>('123456')
 
     const hideModal = (): void => {
         dispatch(updateStateModalLogin(false))
     }
 
-    const handleOnLogin = (): void => {}
+    const handleOnLogin = (): void => {
+        auth()
+            .signInWithEmailAndPassword(email, password)
+            .then((res) => {
+                dispatch(updateCurrentUser(new UserModel(res.user)))
+                dispatch(updateStateModalLogin(false))
+                Util.showAlertSuccess('Login successful')
+            })
+            .catch((error) => {
+                Util.showAlertErrorLogin(error)
+            })
+    }
+
     return (
         <Modal isVisible={isVisible} onBackdropPress={hideModal}>
             <View style={styles.container}>
@@ -35,11 +58,14 @@ const LoginModal = ({}: Props) => {
                         containerStyle={{
                             paddingHorizontal: 0
                         }}
+                        value={email}
                         renderErrorMessage={false}
                         inputContainerStyle={styles.inputContainerStyle}
                         inputStyle={styles.inputStyle}
+                        onChangeText={setEmail}
                     />
                     <Input
+                        value={password}
                         label={'Password'}
                         autoCompleteType='Password'
                         labelStyle={styles.labelStyle}
@@ -66,6 +92,7 @@ const LoginModal = ({}: Props) => {
                         }}
                         inputContainerStyle={styles.inputContainerStyle}
                         inputStyle={styles.inputStyle}
+                        onChangeText={setPassword}
                     />
                 </View>
                 <View>

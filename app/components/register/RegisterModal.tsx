@@ -7,19 +7,36 @@ import { Input } from 'react-native-elements'
 import ButtonNormal from '../createPost/ButtonNormal'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateStateModalLogin, updateStateModalRegister } from '../../redux/userSlice'
+import { register } from '../../redux/thunks/authThunk'
+import auth from '@react-native-firebase/auth'
+import Util from '../../controller/Util'
 
 type Props = {}
 
 const RegisterModal = ({}: Props) => {
     const dispatch = useDispatch()
-    const isVisible = useSelector((state): any => state.userSlice?.modalRegister)
+    const isVisible = useSelector((state: any) => state.userSlice?.modalRegister)
     const [secureTextEntry, setSecureTextEntry] = useState(true)
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
 
     const hideModal = (): void => {
         dispatch(updateStateModalRegister(false))
     }
 
-    const handleOnRegister = (): void => {}
+    const handleOnRegister = (): void => {
+        auth()
+            .createUserWithEmailAndPassword(email.trim(), password.trim())
+            .then((res) => {
+                Util.showAlertSuccess('Register successful')
+                dispatch(updateStateModalRegister(false))
+                dispatch(updateStateModalLogin(true))
+            })
+            .catch((error) => {
+                Util.showAlertErrorLogin(error)
+            })
+    }
+
     return (
         <Modal isVisible={isVisible} onBackdropPress={hideModal}>
             <View style={styles.container}>
@@ -38,6 +55,7 @@ const RegisterModal = ({}: Props) => {
                         renderErrorMessage={false}
                         inputContainerStyle={styles.inputContainerStyle}
                         inputStyle={styles.inputStyle}
+                        onChangeText={setEmail}
                     />
                     <Input
                         label={'Password'}
@@ -66,6 +84,7 @@ const RegisterModal = ({}: Props) => {
                         }}
                         inputContainerStyle={styles.inputContainerStyle}
                         inputStyle={styles.inputStyle}
+                        onChangeText={setPassword}
                     />
                 </View>
                 <View>

@@ -65,4 +65,21 @@ export default class Util {
     static getExtensionFile = (filename) => {
         return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined
     }
+
+    static showAlert = (title) => {
+        Alert.alert('Notification', title)
+    }
+
+    static showAlertErrorLogin = (error) => {
+        console.log('error.code', error.code)
+        if (error.code === 'auth/email-already-in-use') {
+            this.showAlert('That email address is already in use!')
+        } else if (error.code === 'auth/invalid-email') {
+            this.showAlert('That email address is invalid!')
+        } else if (error.code === 'auth/wrong-password') {
+            this.showAlert('That password is wrong!')
+        } else {
+            this.showAlert('Login failed! Please try again later')
+        }
+    }
 }
