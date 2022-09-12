@@ -25,8 +25,6 @@ const Community = (props: Props) => {
                 />
                 <ButtonCreatePost />
             </View>
-            <LoginModal />
-            <RegisterModal />
         </SafeAreaView>
     )
 }

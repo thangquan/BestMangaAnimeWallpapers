@@ -9,9 +9,6 @@ import Constant from './../../controller/Constant'
 import Loading from './../common/Loading'
 import LoadingFooter from '../common/LoadingFooter'
 import { useDispatch, useSelector } from 'react-redux'
-import Modal from 'react-native-modal'
-import LoginModal from '../login/LoginModal'
-import RegisterModal from '../register/RegisterModal'
 
 type Props = {}
 
