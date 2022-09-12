@@ -20,8 +20,6 @@ const Home = (props: Props) => {
     const [listCategory, setListCategory] = useState<any[]>(Constant.categories)
     const [loading, setLoading] = useState<boolean>(false)
     const currentCategoryFocus = useSelector((state: any) => state.categorySlice?.currentFocused)
-    const [isVisibleLogin, setIsVisibleLogin] = useState<boolean>(true)
-    const [isVisibleRegister, setIsVisibleRegister] = useState<boolean>(false)
 
     const onEndReached = (): void => {
         CommonAPIs.getImageByCategory(currentCategoryFocus)
@@ -70,16 +68,6 @@ const Home = (props: Props) => {
                         ListFooterComponent={() => <LoadingFooter />}
                     />
                 )}
-                <LoginModal
-                    isVisible={isVisibleLogin}
-                    setIsVisible={setIsVisibleLogin}
-                    setIsVisibleRegister={setIsVisibleRegister}
-                />
-                <RegisterModal
-                    isVisible={isVisibleRegister}
-                    setIsVisible={setIsVisibleRegister}
-                    setIsVisibleLogin={setIsVisibleLogin}
-                />
             </View>
         </SafeAreaView>
     )

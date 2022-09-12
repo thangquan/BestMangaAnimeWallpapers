@@ -5,14 +5,21 @@ import Icon5 from 'react-native-vector-icons/FontAwesome5'
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import Constant from '../../controller/Constant'
 import { useNavigation } from '@react-navigation/native'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateStateModalLogin } from '../../redux/userSlice'
 
 type Props = {}
 
 const ButtonCreatePost = (props: Props) => {
     const navigation = useNavigation()
-
+    const dispatch = useDispatch()
+    const currentUser = useSelector((state): any => state.userSlice?.data)
     const handleOnCreatePost = (): void => {
-        navigation.navigate(Constant.screenName.CreatePost)
+        if (currentUser.id) {
+            navigation.navigate(Constant.screenName.CreatePost)
+        } else {
+            dispatch(updateStateModalLogin(true))
+        }
     }
 
     return (

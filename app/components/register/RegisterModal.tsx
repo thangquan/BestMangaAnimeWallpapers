@@ -5,18 +5,18 @@ import Constant from '../../controller/Constant'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { Input } from 'react-native-elements'
 import ButtonNormal from '../createPost/ButtonNormal'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateStateModalLogin, updateStateModalRegister } from '../../redux/userSlice'
 
-type Props = {
-    isVisible: boolean
-    setIsVisible: any
-    setIsVisibleLogin: any
-}
+type Props = {}
 
-const RegisterModal = ({ isVisible, setIsVisible, setIsVisibleLogin }: Props) => {
+const RegisterModal = ({}: Props) => {
+    const dispatch = useDispatch()
+    const isVisible = useSelector((state): any => state.userSlice?.modalRegister)
     const [secureTextEntry, setSecureTextEntry] = useState(true)
 
     const hideModal = (): void => {
-        setIsVisible(false)
+        dispatch(updateStateModalRegister(false))
     }
 
     const handleOnRegister = (): void => {}
@@ -79,7 +79,7 @@ const RegisterModal = ({ isVisible, setIsVisible, setIsVisibleLogin }: Props) =>
                     <TouchableOpacity
                         onPress={() => {
                             hideModal()
-                            setIsVisibleLogin(true)
+                            dispatch(updateStateModalLogin(true))
                         }}
                     >
                         <Text style={styles.register}>Login</Text>

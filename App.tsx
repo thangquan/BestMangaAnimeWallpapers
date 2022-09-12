@@ -6,12 +6,16 @@ import RootNavigation from './app/components/navigation/RootNavigation'
 import Toast from 'react-native-toast-message'
 import { Provider } from 'react-redux'
 import store from './app/redux/store'
+import LoginModal from './app/components/login/LoginModal'
+import RegisterModal from './app/components/register/RegisterModal'
 
 const App = () => {
     return (
         <Provider store={store}>
             <RootNavigation />
             <Toast />
+            <LoginModal />
+            <RegisterModal />
         </Provider>
     )
 }
