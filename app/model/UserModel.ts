@@ -13,6 +13,6 @@ export default class UserModel {
         this.uid = dict?.uid ?? ''
         this.email = dict?.email ?? ''
         this.accessToken = dict?.accessToken ?? ''
-        this.name = dict?.fullname ?? ''
+        this.name = dict?.name ?? ''
     }
 }

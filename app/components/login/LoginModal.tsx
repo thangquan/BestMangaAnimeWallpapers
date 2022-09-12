@@ -16,6 +16,7 @@ import auth from '@react-native-firebase/auth'
 import Util from '../../controller/Util'
 import UserModel from '../../model/UserModel'
 import RNProgressHud from 'progress-hud'
+import firestore from '@react-native-firebase/firestore'
 
 type Props = {}
 
@@ -23,7 +24,7 @@ const LoginModal = ({}: Props) => {
     const dispatch = useDispatch()
     const isVisible = useSelector((state: any) => state.userSlice.modalLogin)
     const [secureTextEntry, setSecureTextEntry] = useState(true)
-    const [email, setEmail] = useState<string>('cu@cai.nho')
+    const [email, setEmail] = useState<string>('mot@mot.mot')
     const [password, setPassword] = useState<string>('123456')
 
     const hideModal = (): void => {
@@ -43,17 +44,21 @@ const LoginModal = ({}: Props) => {
         RNProgressHud.show()
         auth()
             .signInWithEmailAndPassword(email, password)
-            .then((res) => {
-                dispatch(updateCurrentUser(new UserModel(res.user)))
-                dispatch(updateStateModalLogin(false))
-                Util.showAlertSuccess('Login successful')
-            })
+            .then(handleOnLoginSuccess)
             .catch((error) => {
                 Util.showAlertErrorLogin(error)
             })
             .finally(() => {
                 RNProgressHud.dismiss()
             })
+    }
+
+    const handleOnLoginSuccess = async (res: any): Promise<void> => {
+        let user: any = await firestore().collection('Users').doc(res.user.uid).get()
+        console.log('user', user._data)
+        dispatch(updateCurrentUser(new UserModel(user._data)))
+        dispatch(updateStateModalLogin(false))
+        Util.showAlertSuccess('Login successful')
     }
 
     return (

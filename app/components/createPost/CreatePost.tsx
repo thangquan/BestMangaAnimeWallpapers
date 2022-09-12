@@ -3,9 +3,12 @@ import React, { useState, useEffect } from 'react'
 import Constant from '../../controller/Constant'
 import HeaderCreatePost from './HeaderCreatePost'
 import InfoUser from './InfoUser'
+import { useSelector } from 'react-redux'
 type Props = {}
 
 const CreatePost = (props: Props) => {
+    const currentUser = useSelector((state: any) => state.userSlice.data)
+    console.log(currentUser)
     const [textContent, setTextContent] = useState<string>('')
 
     return (
