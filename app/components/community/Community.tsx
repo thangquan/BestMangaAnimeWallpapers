@@ -3,10 +3,9 @@ import React, { createRef, useEffect, useRef } from 'react'
 import Constant from '../../controller/Constant'
 import HeaderCommunity from './components/HeaderCommunity'
 import Post from './components/Post'
+import ButtonCreatePost from '../common/ButtonCreatePost'
 
 type Props = {}
-
-// export const animationLoveRef = createRef<Lottie>()
 
 const Community = (props: Props) => {
     const renderItem = (item: any) => <Post />
@@ -21,6 +20,7 @@ const Community = (props: Props) => {
                     paddingBottom: 20
                 }}
             />
+            <ButtonCreatePost />
         </View>
     )
 }

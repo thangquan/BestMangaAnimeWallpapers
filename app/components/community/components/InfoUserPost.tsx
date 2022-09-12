@@ -23,7 +23,7 @@ const InfoUserPost = (props: Props) => {
             </View>
             <View style={styles.morePost}>
                 <TouchableOpacity style={styles.btnMorePost}>
-                    <Icon name='ellipsis-horizontal' size={28} color={Constant.color.text} />
+                    <Icon name='ellipsis-horizontal' size={26} color={Constant.color.text} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
     viewName: {
-        marginLeft: 10,
+        marginLeft: 6,
         paddingVertical: 4
     },
     name: {
@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
         fontFamily: Constant.fonts.robotoSlabMedium
     },
     timePost: {
-        color: Constant.color.text,
+        marginTop: 2,
+        color: Constant.color.grayText,
         fontFamily: Constant.fonts.robotoSlabRegular,
         fontSize: 12
     },

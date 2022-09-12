@@ -5,17 +5,6 @@ import Constant from '../../../controller/Constant'
 
 type Props = {}
 
-const listReact = [
-    {
-        type: 'love',
-        iconName: 'heart'
-    },
-    {
-        type: 'comment',
-        iconName: 'chatbubbles-outline'
-    }
-]
-
 const ReactPost = (props: Props) => {
     return (
         <View style={styles.container}>
@@ -58,6 +47,6 @@ const styles = StyleSheet.create({
     textCountLover: {
         fontSize: 13,
         color: Constant.color.grayText,
-        fontFamily: Constant.fonts.robotoSlabRegular
+        fontFamily: Constant.fonts.poppinsRegular
     }
 })
