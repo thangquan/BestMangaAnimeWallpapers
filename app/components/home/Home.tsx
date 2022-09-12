@@ -11,10 +11,9 @@ import LoadingFooter from '../common/LoadingFooter'
 import { useDispatch, useSelector } from 'react-redux'
 import Modal from 'react-native-modal'
 import LoginModal from '../login/LoginModal'
+import RegisterModal from '../register/RegisterModal'
 
 type Props = {}
-
-export const _refLoginModal = createRef<Modal>()
 
 const Home = (props: Props) => {
     const [data, setData] = useState<any[]>([])
@@ -22,6 +21,7 @@ const Home = (props: Props) => {
     const [loading, setLoading] = useState<boolean>(false)
     const currentCategoryFocus = useSelector((state: any) => state.categorySlice?.currentFocused)
     const [isVisibleLogin, setIsVisibleLogin] = useState<boolean>(true)
+    const [isVisibleRegister, setIsVisibleRegister] = useState<boolean>(false)
 
     const onEndReached = (): void => {
         CommonAPIs.getImageByCategory(currentCategoryFocus)
@@ -70,7 +70,16 @@ const Home = (props: Props) => {
                         ListFooterComponent={() => <LoadingFooter />}
                     />
                 )}
-                <LoginModal isVisible={isVisibleLogin} setIsVisible={setIsVisibleLogin} />
+                <LoginModal
+                    isVisible={isVisibleLogin}
+                    setIsVisible={setIsVisibleLogin}
+                    setIsVisibleRegister={setIsVisibleRegister}
+                />
+                <RegisterModal
+                    isVisible={isVisibleRegister}
+                    setIsVisible={setIsVisibleRegister}
+                    setIsVisibleLogin={setIsVisibleLogin}
+                />
             </View>
         </SafeAreaView>
     )

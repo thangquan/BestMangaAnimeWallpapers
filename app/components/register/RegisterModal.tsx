@@ -9,21 +9,21 @@ import ButtonNormal from '../createPost/ButtonNormal'
 type Props = {
     isVisible: boolean
     setIsVisible: any
-    setIsVisibleRegister: any
+    setIsVisibleLogin: any
 }
 
-const LoginModal = ({ isVisible, setIsVisible, setIsVisibleRegister }: Props) => {
+const RegisterModal = ({ isVisible, setIsVisible, setIsVisibleLogin }: Props) => {
     const [secureTextEntry, setSecureTextEntry] = useState(true)
 
     const hideModal = (): void => {
         setIsVisible(false)
     }
 
-    const handleOnLogin = (): void => {}
+    const handleOnRegister = (): void => {}
     return (
         <Modal isVisible={isVisible} onBackdropPress={hideModal}>
             <View style={styles.container}>
-                <Text style={styles.title}>Wellcome to Waifu Pictures {'\n'} 😍😍😘😘😍😍😘😘</Text>
+                <Text style={styles.title}>Register to Waifu Pictures {'\n'} 😍😍😘😘😍😍😘😘</Text>
                 <View style={styles.formInput}>
                     <Input
                         label={'Email'}
@@ -70,8 +70,8 @@ const LoginModal = ({ isVisible, setIsVisible, setIsVisibleRegister }: Props) =>
                 </View>
                 <View>
                     <ButtonNormal
-                        title='Login'
-                        onPress={handleOnLogin}
+                        title='Register'
+                        onPress={handleOnRegister}
                         containerStyle={{
                             marginTop: 20
                         }}
@@ -79,10 +79,10 @@ const LoginModal = ({ isVisible, setIsVisible, setIsVisibleRegister }: Props) =>
                     <TouchableOpacity
                         onPress={() => {
                             hideModal()
-                            setIsVisibleRegister(true)
+                            setIsVisibleLogin(true)
                         }}
                     >
-                        <Text style={styles.register}>Register</Text>
+                        <Text style={styles.register}>Login</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -90,10 +90,11 @@ const LoginModal = ({ isVisible, setIsVisible, setIsVisibleRegister }: Props) =>
     )
 }
 
-export default LoginModal
+export default RegisterModal
 
 const styles = StyleSheet.create({
     container: {
+        // flex: 1,
         minHeight: Constant.screen.width,
         backgroundColor: Constant.color.postBackgroundColor,
         borderRadius: 8,
