@@ -78,8 +78,15 @@ export default class Util {
             this.showAlert('That email address is invalid!')
         } else if (error.code === 'auth/wrong-password') {
             this.showAlert('That password is wrong!')
+        } else if (error.code === 'auth/user-not-found') {
+            this.showAlert('User not found!')
         } else {
             this.showAlert('Login failed! Please try again later')
         }
+    }
+
+    static validEmail = (email = '') => {
+        let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        return pattern.test(email)
     }
 }

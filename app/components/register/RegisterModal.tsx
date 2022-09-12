@@ -10,6 +10,8 @@ import { updateStateModalLogin, updateStateModalRegister } from '../../redux/use
 import { register } from '../../redux/thunks/authThunk'
 import auth from '@react-native-firebase/auth'
 import Util from '../../controller/Util'
+import firestore from '@react-native-firebase/firestore'
+import RNProgressHud from 'progress-hud'
 
 type Props = {}
 
@@ -19,21 +21,52 @@ const RegisterModal = ({}: Props) => {
     const [secureTextEntry, setSecureTextEntry] = useState(true)
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
+    const [name, setName] = useState<string>('')
 
     const hideModal = (): void => {
         dispatch(updateStateModalRegister(false))
     }
 
+    const handleOnClickBtnRegister = (): void => {
+        if (!name.trim()) {
+            Util.showAlert('Name registration is required')
+        } else if (!Util.validEmail(email.trim())) {
+            Util.showAlert('Email is not valid')
+        } else if (password.trim().length < 6) {
+            Util.showAlert('Password is too short')
+        } else {
+            handleOnRegister()
+        }
+    }
+
     const handleOnRegister = (): void => {
+        RNProgressHud.show()
         auth()
             .createUserWithEmailAndPassword(email.trim(), password.trim())
             .then((res) => {
+                handleRegisterSuccess()
+            })
+            .catch((error) => {
+                Util.showAlertErrorLogin(error)
+            })
+    }
+
+    const handleRegisterSuccess = (): void => {
+        firestore()
+            .collection('Users')
+            .doc(auth()?.currentUser?.uid)
+            .set({
+                id: auth()?.currentUser?.uid,
+                email: auth()?.currentUser?.email,
+                name: name.trim()
+            })
+            .then(() => {
                 Util.showAlertSuccess('Register successful')
                 dispatch(updateStateModalRegister(false))
                 dispatch(updateStateModalLogin(true))
             })
-            .catch((error) => {
-                Util.showAlertErrorLogin(error)
+            .finally(() => {
+                RNProgressHud.dismiss()
             })
     }
 
@@ -43,6 +76,21 @@ const RegisterModal = ({}: Props) => {
                 <Text style={styles.title}>Register to Waifu Pictures {'\n'} 😍😍😘😘😍😍😘😘</Text>
                 <View style={styles.formInput}>
                     <Input
+                        label={'Name'}
+                        labelStyle={styles.labelStyle}
+                        autoCompleteType='email'
+                        placeholder='Name'
+                        keyboardType='default'
+                        leftIcon={<Icon name='person-outline' size={22} color='gray' />}
+                        containerStyle={{
+                            paddingHorizontal: 0
+                        }}
+                        renderErrorMessage={false}
+                        inputContainerStyle={styles.inputContainerStyle}
+                        inputStyle={styles.inputStyle}
+                        onChangeText={setName}
+                    />
+                    <Input
                         label={'Email'}
                         labelStyle={styles.labelStyle}
                         autoCompleteType='email'
@@ -50,6 +98,7 @@ const RegisterModal = ({}: Props) => {
                         keyboardType='email-address'
                         leftIcon={<Icon name='mail-outline' size={22} color='gray' />}
                         containerStyle={{
+                            marginTop: 10,
                             paddingHorizontal: 0
                         }}
                         renderErrorMessage={false}
@@ -90,7 +139,7 @@ const RegisterModal = ({}: Props) => {
                 <View>
                     <ButtonNormal
                         title='Register'
-                        onPress={handleOnRegister}
+                        onPress={handleOnClickBtnRegister}
                         containerStyle={{
                             marginTop: 20
                         }}

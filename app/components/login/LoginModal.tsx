@@ -30,7 +30,17 @@ const LoginModal = ({}: Props) => {
         dispatch(updateStateModalLogin(false))
     }
 
+    const handleOnClickBtnLogin = (): void => {
+        if (!Util.validEmail(email.trim())) {
+            Util.showAlert('Email is not valid')
+        } else if (password.trim().length < 6) {
+            Util.showAlert('Password is too short')
+        } else {
+            handleOnLogin()
+        }
+    }
     const handleOnLogin = (): void => {
+        RNProgressHud.show()
         auth()
             .signInWithEmailAndPassword(email, password)
             .then((res) => {
@@ -40,6 +50,9 @@ const LoginModal = ({}: Props) => {
             })
             .catch((error) => {
                 Util.showAlertErrorLogin(error)
+            })
+            .finally(() => {
+                RNProgressHud.dismiss()
             })
     }
 
@@ -98,7 +111,7 @@ const LoginModal = ({}: Props) => {
                 <View>
                     <ButtonNormal
                         title='Login'
-                        onPress={handleOnLogin}
+                        onPress={handleOnClickBtnLogin}
                         containerStyle={{
                             marginTop: 20
                         }}

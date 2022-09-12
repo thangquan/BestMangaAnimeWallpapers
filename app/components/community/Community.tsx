@@ -6,6 +6,7 @@ import Post from './components/Post'
 import ButtonCreatePost from '../common/ButtonCreatePost'
 import LoginModal from '../login/LoginModal'
 import RegisterModal from '../register/RegisterModal'
+import firestore from '@react-native-firebase/firestore'
 
 type Props = {}
 

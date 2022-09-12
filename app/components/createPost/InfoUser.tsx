@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
     viewName: {
-        marginLeft: 6,
+        marginLeft: 10,
         paddingVertical: 4
     },
     name: {
