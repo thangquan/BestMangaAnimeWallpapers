@@ -17,7 +17,8 @@ export default Constant = {
         DrawerNavigation: 'DrawerNavigation',
         Privacy: 'Privacy',
         TermsPage: 'TermsPage',
-        Community: 'Community'
+        Community: 'Community',
+        CreatePost: 'CreatePost'
     },
     color: {
         green: '#3FC44E',

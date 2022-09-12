@@ -4,11 +4,16 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import Icon5 from 'react-native-vector-icons/FontAwesome5'
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import Constant from '../../controller/Constant'
+import { useNavigation } from '@react-navigation/native'
 
 type Props = {}
 
 const ButtonCreatePost = (props: Props) => {
-    const handleOnCreatePost = (): void => {}
+    const navigation = useNavigation()
+
+    const handleOnCreatePost = (): void => {
+        navigation.navigate(Constant.screenName.CreatePost)
+    }
 
     return (
         <View style={styles.container}>

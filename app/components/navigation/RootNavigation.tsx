@@ -12,6 +12,7 @@ import Privacy from '../privacy/Privacy'
 import TermsPage from '../termsPage/TermsPage'
 import Community from '../community/Community'
 import TabBarNavigation from './TabBarNavigation'
+import CreatePost from '../createPost/CreatePost'
 
 type Props = {}
 
@@ -44,6 +45,7 @@ const RootNavigation = (props: Props) => {
                 <Stack.Screen name={Constant.screenName.ImageDetail} component={ImageDetail} />
                 <Stack.Screen name={Constant.screenName.Privacy} component={Privacy} />
                 <Stack.Screen name={Constant.screenName.TermsPage} component={TermsPage} />
+                <Stack.Screen name={Constant.screenName.CreatePost} component={CreatePost} />
             </Stack.Navigator>
         </NavigationContainer>
     )

@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Pressable } from 'react-nativ
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Constant from '../../controller/Constant'
-import { useNavigation } from '@react-navigation/native'
+import { DrawerActions, useNavigation } from '@react-navigation/native'
 
 type Props = {}
 
@@ -13,14 +13,14 @@ const HeaderNormal = (props: Props) => {
         <View style={styles.header}>
             <Pressable
                 onPress={() => {
-                    navigation.openDrawer()
+                    navigation.dispatch(DrawerActions.toggleDrawer())
                 }}
             >
                 <Text style={styles.txtHeader}>Waifu Pictures</Text>
             </Pressable>
             <TouchableOpacity
                 onPress={() => {
-                    navigation.openDrawer()
+                    navigation.dispatch(DrawerActions.toggleDrawer())
                 }}
             >
                 <Icon name='options' size={24} color={'#fff'} />
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginTop: 20
+        marginTop: 10
     },
     txtHeader: {
         fontSize: 22,
