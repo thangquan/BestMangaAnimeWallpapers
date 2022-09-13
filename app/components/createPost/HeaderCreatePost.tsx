@@ -4,9 +4,11 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import Constant from '../../controller/Constant'
 import { useNavigation } from '@react-navigation/native'
 
-type Props = {}
+type Props = {
+    handleOnCreatePost: Function
+}
 
-const HeaderCreatePost = (props: Props) => {
+const HeaderCreatePost = ({ handleOnCreatePost }: Props) => {
     const navigation = useNavigation()
 
     return (
@@ -19,7 +21,12 @@ const HeaderCreatePost = (props: Props) => {
                 <Icon name='arrow-back-outline' size={26} color={Constant.color.text} />
             </TouchableOpacity>
             <Text style={styles.text}>Post</Text>
-            <TouchableOpacity style={styles.btnCreate}>
+            <TouchableOpacity
+                style={styles.btnCreate}
+                onPress={() => {
+                    handleOnCreatePost()
+                }}
+            >
                 <Text style={styles.txtCreate}>Publich</Text>
             </TouchableOpacity>
         </View>

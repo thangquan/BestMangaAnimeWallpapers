@@ -21,7 +21,7 @@ type Props = {}
 
 export type RootStackParamList = {
     DrawerNavigation: undefined
-    ImageDetail: { imageUrl: '' }
+    ImageDetail: { imageUrl: ''; showFooter?: boolean }
     Privacy: undefined
 }
 

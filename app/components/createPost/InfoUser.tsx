@@ -1,24 +1,26 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import FastImage from 'react-native-fast-image'
-import Icon from 'react-native-vector-icons/Ionicons'
 import Constant from '../../controller/Constant'
+import { useSelector } from 'react-redux'
 
 type Props = {}
 
 const InfoUser = (props: Props) => {
+    const { avatarUrl, name } = useSelector((state: any) => state.userSlice.data)
+
     return (
         <View style={styles.infoUserPost}>
             <View style={styles.viewAvatar}>
                 <FastImage
                     source={{
-                        uri: 'https://picsum.photos/200/300'
+                        uri: avatarUrl
                     }}
                     style={styles.avatar}
                 />
             </View>
             <View style={styles.viewName}>
-                <Text style={styles.name}>Emi Fukada</Text>
+                <Text style={styles.name}>{name}</Text>
             </View>
         </View>
     )

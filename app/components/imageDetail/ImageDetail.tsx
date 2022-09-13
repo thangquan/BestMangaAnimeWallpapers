@@ -20,7 +20,8 @@ type Props = {
 
 const ImageDetail = () => {
     const route = useRoute<RootRouteProps<'ImageDetail'>>()
-    const imageUrl = route?.params?.imageUrl
+    const imageUrl: string = route?.params?.imageUrl
+    const showFooter: Boolean = route?.params?.showFooter ?? true
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>
@@ -39,7 +40,7 @@ const ImageDetail = () => {
                         style={styles.image}
                     />
                 </ImageZoom>
-                <FooterIcon imageUrl={imageUrl} />
+                {showFooter && <FooterIcon imageUrl={imageUrl} />}
             </View>
         </SafeAreaView>
     )
