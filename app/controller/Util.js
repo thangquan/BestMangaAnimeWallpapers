@@ -89,4 +89,29 @@ export default class Util {
         let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         return pattern.test(email)
     }
+
+    static calculateElapsedTime = (timeCreated) => {
+        const created = timeCreated
+        let periods = {
+            year: 365 * 30 * 24 * 60 * 60 * 1000,
+            month: 30 * 24 * 60 * 60 * 1000,
+            week: 7 * 24 * 60 * 60 * 1000,
+            day: 24 * 60 * 60 * 1000,
+            hour: 60 * 60 * 1000,
+            minute: 60 * 1000
+        }
+        let diff = Date.now() - created
+
+        for (const key in periods) {
+            if (diff >= periods[key]) {
+                let result = Math.floor(diff / periods[key])
+                if (result == 1) {
+                    return `${result} ${key} ago`
+                } else {
+                    return `${result} ${key}s ago`
+                }
+            }
+        }
+        return 'Just now'
+    }
 }

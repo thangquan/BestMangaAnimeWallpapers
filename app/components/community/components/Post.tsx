@@ -5,16 +5,21 @@ import ImagePost from './ImagePost'
 import Constant from '../../../controller/Constant'
 import ReactPost from './ReactPost'
 import TitlePost from './TitlePost'
+import PostModel from '../../../model/PostModel'
 
-type Props = {}
+type Props = {
+    dataPost: PostModel
+}
 
-const Post = (props: Props) => {
+const Post = ({ dataPost }: Props) => {
+    const { image, title } = dataPost
+
     return (
         <View style={styles.post}>
-            <InfoUserPost />
-            <ImagePost imageUrl='https://images6.alphacoders.com/740/thumb-1920-740310.jpg' />
+            <InfoUserPost data={dataPost} />
+            <ImagePost imageUrl={image} />
             <ReactPost />
-            <TitlePost title='hello world' />
+            <TitlePost title={title} />
         </View>
     )
 }

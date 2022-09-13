@@ -3,23 +3,30 @@ import React from 'react'
 import FastImage from 'react-native-fast-image'
 import Constant from '../../../controller/Constant'
 import Icon from 'react-native-vector-icons/Ionicons'
+import UserModel from '../../../model/UserModel'
+import PostModel from '../../../model/PostModel'
+import Util from '../../../controller/Util'
 
-type Props = {}
+type Props = {
+    data: PostModel
+}
 
-const InfoUserPost = (props: Props) => {
+const InfoUserPost = ({ data }: Props) => {
+    const { name, avatarUrl } = data?.user
+
     return (
         <View style={styles.infoUserPost}>
             <View style={styles.viewAvatar}>
                 <FastImage
                     source={{
-                        uri: 'https://picsum.photos/200/300'
+                        uri: avatarUrl
                     }}
                     style={styles.avatar}
                 />
             </View>
             <View style={styles.viewName}>
-                <Text style={styles.name}>Emi Fukada</Text>
-                <Text style={styles.timePost}>2 days ago</Text>
+                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.timePost}>{Util.calculateElapsedTime(data.created)}</Text>
             </View>
             <View style={styles.morePost}>
                 <TouchableOpacity style={styles.btnMorePost}>

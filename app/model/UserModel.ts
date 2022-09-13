@@ -1,10 +1,10 @@
 export default class UserModel {
-    id?: String
-    uid: String = ''
-    accessToken: String = ''
-    name: String = ''
-    email: String = ''
-    avatarUrl: String = ''
+    id?: string
+    uid: string = ''
+    accessToken: string = ''
+    name: string = ''
+    email: string = ''
+    avatarUrl: string = ''
 
     constructor(dict: any) {
         if (dict === undefined || dict === null) {
