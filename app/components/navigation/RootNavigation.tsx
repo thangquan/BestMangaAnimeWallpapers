@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { StackActionType } from '@react-navigation/native'
 import { NavigationContainer } from '@react-navigation/native'
@@ -13,6 +13,9 @@ import TermsPage from '../termsPage/TermsPage'
 import Community from '../community/Community'
 import TabBarNavigation from './TabBarNavigation'
 import CreatePost from '../createPost/CreatePost'
+import StorageManager from '../../controller/StorageManager'
+import { useDispatch } from 'react-redux'
+import { updateCurrentUser } from '../../redux/userSlice'
 
 type Props = {}
 
@@ -30,6 +33,18 @@ export type RootRouteProps<RouteName extends keyof RootStackParamList> = RoutePr
 const Stack = createNativeStackNavigator()
 
 const RootNavigation = (props: Props) => {
+    const dispatch = useDispatch()
+
+    const loading = async (): Promise<void> => {
+        let currentUser = await StorageManager.getData(Constant.keys.currentUser)
+        if (currentUser && currentUser?.id) {
+            dispatch(updateCurrentUser(currentUser))
+        }
+    }
+
+    useEffect(() => {
+        loading()
+    }, [])
     return (
         <NavigationContainer>
             <Stack.Navigator

@@ -17,6 +17,7 @@ import Util from '../../controller/Util'
 import UserModel from '../../model/UserModel'
 import RNProgressHud from 'progress-hud'
 import firestore from '@react-native-firebase/firestore'
+import StorageManager from '../../controller/StorageManager'
 
 type Props = {}
 
@@ -54,8 +55,11 @@ const LoginModal = ({}: Props) => {
     }
 
     const handleOnLoginSuccess = async (res: any): Promise<void> => {
-        let user: any = await firestore().collection('Users').doc(res.user.uid).get()
-        console.log('user', user._data)
+        let user: any = await firestore()
+            .collection(Constant.collection.users)
+            .doc(res.user.uid)
+            .get()
+        StorageManager.setData(Constant.keys.currentUser, new UserModel(user._data))
         dispatch(updateCurrentUser(new UserModel(user._data)))
         dispatch(updateStateModalLogin(false))
         Util.showAlertSuccess('Login successful')

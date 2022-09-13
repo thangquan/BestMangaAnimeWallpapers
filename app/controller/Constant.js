@@ -99,5 +99,11 @@ export default Constant = {
         'poke',
         'dance',
         'cringe'
-    ]
+    ],
+    keys: {
+        currentUser: 'currentUser'
+    },
+    collection: {
+        users: 'Users'
+    }
 }
