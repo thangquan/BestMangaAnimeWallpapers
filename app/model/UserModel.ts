@@ -4,6 +4,7 @@ export default class UserModel {
     accessToken: String = ''
     name: String = ''
     email: String = ''
+    avatarUrl: String = ''
 
     constructor(dict: any) {
         if (dict === undefined || dict === null) {
@@ -14,5 +15,6 @@ export default class UserModel {
         this.email = dict?.email ?? ''
         this.accessToken = dict?.accessToken ?? ''
         this.name = dict?.name ?? ''
+        this.avatarUrl = dict?.avatarUrl ?? 'https://picsum.photos/200/300'
     }
 }

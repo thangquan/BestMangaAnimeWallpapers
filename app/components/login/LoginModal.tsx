@@ -41,6 +41,7 @@ const LoginModal = ({}: Props) => {
             handleOnLogin()
         }
     }
+
     const handleOnLogin = (): void => {
         RNProgressHud.show()
         auth()

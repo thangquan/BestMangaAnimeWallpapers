@@ -104,6 +104,7 @@ export default Constant = {
         currentUser: 'currentUser'
     },
     collection: {
-        users: 'Users'
+        users: 'Users',
+        posts: 'Posts'
     }
 }
