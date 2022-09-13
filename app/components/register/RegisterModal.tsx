@@ -70,6 +70,10 @@ const RegisterModal = ({}: Props) => {
             })
     }
 
+    if (!isVisible) {
+        return null
+    }
+
     return (
         <Modal isVisible={isVisible} onBackdropPress={hideModal}>
             <View style={styles.container}>
