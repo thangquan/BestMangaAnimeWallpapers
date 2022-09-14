@@ -20,7 +20,8 @@ export default Constant = {
         TermsPage: 'TermsPage',
         Community: 'Community',
         CreatePost: 'CreatePost',
-        Profile: 'Profile'
+        Profile: 'Profile',
+        UpdateProfile: 'UpdateProfile'
     },
     color: {
         green: '#3FC44E',
