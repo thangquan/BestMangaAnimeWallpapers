@@ -7,7 +7,8 @@ export default class PostModel {
     image: string = ''
     idUser: string = ''
     user: any
-
+    like: number = 0
+    comment: number = 0
     constructor(dict: any) {
         if (dict === undefined || dict === null) {
             return

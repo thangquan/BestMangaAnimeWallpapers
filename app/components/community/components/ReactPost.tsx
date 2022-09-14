@@ -2,10 +2,15 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React, { useEffect, useRef } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Constant from '../../../controller/Constant'
+import PostModel from '../../../model/PostModel'
 
-type Props = {}
+type Props = {
+    dataPost: PostModel
+}
 
-const ReactPost = (props: Props) => {
+const ReactPost = ({ dataPost }: Props) => {
+    const { like, comment } = dataPost
+
     return (
         <View style={styles.container}>
             <View style={styles.listReact}>
@@ -22,8 +27,16 @@ const ReactPost = (props: Props) => {
                 </TouchableOpacity>
             </View>
             <View style={styles.countReact}>
-                <Text style={styles.textCountLover}>6,969 likes | </Text>
-                <Text style={styles.textCountLover}>6,969 comments</Text>
+                {like ? (
+                    <Text style={styles.textCountLover}>
+                        {like} like{like > 1 && 's'}
+                    </Text>
+                ) : null}
+                {comment ? (
+                    <Text style={styles.textCountLover}>
+                        {comment} comment{comment > 1 && 's'}
+                    </Text>
+                ) : null}
             </View>
         </View>
     )
@@ -42,11 +55,20 @@ const styles = StyleSheet.create({
         padding: 5
     },
     countReact: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        backgroundColor: 'red',
+        alignItems: 'center'
     },
     textCountLover: {
         fontSize: 13,
         color: Constant.color.grayText,
-        fontFamily: Constant.fonts.poppinsRegular
+        fontFamily: Constant.fonts.poppinsRegular,
+        includeFontPadding: false
+    },
+    driverReact: {
+        paddingHorizontal: 3,
+        color: Constant.color.grayText,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })

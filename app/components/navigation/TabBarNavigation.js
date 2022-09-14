@@ -5,6 +5,7 @@ import Home from '../home/Home'
 import Constant from '../../controller/Constant'
 import Community from '../community/Community'
 import Icon from 'react-native-vector-icons/Ionicons'
+import Profile from '../profile/Profile'
 
 const Tab = createMaterialBottomTabNavigator()
 
@@ -28,6 +29,8 @@ const TabBarNavigation = () => {
                         iconName = 'home'
                     } else if (route.name === Constant.screenName.Community) {
                         iconName = 'planet'
+                    } else if (route.name === Constant.screenName.Profile) {
+                        iconName = 'person'
                     }
                     return <Icon name={iconName} size={22} color={focusedColor} />
                 },
@@ -39,6 +42,7 @@ const TabBarNavigation = () => {
         >
             <Tab.Screen name={Constant.screenName.Home} component={Home} />
             <Tab.Screen name={Constant.screenName.Community} component={Community} />
+            <Tab.Screen name={Constant.screenName.Profile} component={Profile} />
         </Tab.Navigator>
     )
 }
