@@ -65,7 +65,9 @@ const Profile = (props: Props) => {
         }
     }
 
-    const handleOnUpdateInfoUser = (): void => {}
+    const handleOnUpdateInfoUser = (): void => {
+        navigation.dispatch(StackActions.push(Constant.screenName.UpdateProfile))
+    }
 
     const handleOnHelp = (): void => {
         Linking.openURL(`mailto:${Constant.mailAdmin}`)

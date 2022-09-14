@@ -16,6 +16,7 @@ import CreatePost from '../createPost/CreatePost'
 import StorageManager from '../../controller/StorageManager'
 import { useDispatch } from 'react-redux'
 import { updateCurrentUser } from '../../redux/userSlice'
+import UpdateProfile from '../updateProfile/UpdateProfile'
 
 type Props = {}
 
@@ -61,6 +62,7 @@ const RootNavigation = (props: Props) => {
                 <Stack.Screen name={Constant.screenName.Privacy} component={Privacy} />
                 <Stack.Screen name={Constant.screenName.TermsPage} component={TermsPage} />
                 <Stack.Screen name={Constant.screenName.CreatePost} component={CreatePost} />
+                <Stack.Screen name={Constant.screenName.UpdateProfile} component={UpdateProfile} />
             </Stack.Navigator>
         </NavigationContainer>
     )
