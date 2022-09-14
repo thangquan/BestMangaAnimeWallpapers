@@ -5,6 +5,7 @@ export default Constant = {
     baseURL: 'https://best-manga-anime-wallpapers.p.rapidapi.com/',
     privacyURL: 'https://pages.flycricket.io/waifu-pictures-0/privacy.html',
     termsPageURL: 'https://pages.flycricket.io/waifu-pictures-0/terms.html',
+    mailAdmin: 'thangpaisen@gmail.com',
     screen: {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height
@@ -18,7 +19,8 @@ export default Constant = {
         Privacy: 'Privacy',
         TermsPage: 'TermsPage',
         Community: 'Community',
-        CreatePost: 'CreatePost'
+        CreatePost: 'CreatePost',
+        Profile: 'Profile'
     },
     color: {
         green: '#3FC44E',
@@ -48,7 +50,8 @@ export default Constant = {
         gifLoading: require('../assets/images/loading.gif'),
         loading: require('../assets/images/ic_loading.png'),
         loadingCute: require('../assets/images/loading_cute.gif'),
-        loadingFooter: require('../assets/images/loading_footer.gif')
+        loadingFooter: require('../assets/images/loading_footer.gif'),
+        avatarDefault: require('../assets/images/ic_avatar_default.png')
     },
     fonts: {
         poppinsBold: 'Poppins-Bold',

@@ -18,7 +18,7 @@ const Post = ({ dataPost }: Props) => {
         <View style={styles.post}>
             <InfoUserPost data={dataPost} />
             <ImagePost imageUrl={image} />
-            <ReactPost />
+            <ReactPost dataPost={dataPost} />
             <TitlePost title={title} />
         </View>
     )

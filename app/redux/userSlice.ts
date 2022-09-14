@@ -3,6 +3,7 @@ import UserModel from '../model/UserModel'
 import Constant from './../controller/Constant'
 import { loginWithEmailAndPassword, register } from './thunks/authThunk'
 import RNProgressHud from 'progress-hud'
+import StorageManager from '../controller/StorageManager'
 
 const userSlice = createSlice({
     name: 'categorySlice',
@@ -18,8 +19,12 @@ const userSlice = createSlice({
         updateStateModalLogin: (state, action) => {
             state.modalLogin = action.payload
         },
-        updateStateModalRegister: (state, action) => {
+        updateStateModalRegister: (state, action: any) => {
             state.modalRegister = action.payload
+        },
+        logoutUser: (state, action: any) => {
+            state.data = new UserModel(null)
+            StorageManager.setData(Constant.keys.currentUser, null)
         }
     },
     extraReducers: (builder) => {
@@ -41,5 +46,6 @@ const userSlice = createSlice({
 })
 
 const { reducer, actions } = userSlice
-export const { updateCurrentUser, updateStateModalLogin, updateStateModalRegister } = actions
+export const { updateCurrentUser, updateStateModalLogin, updateStateModalRegister, logoutUser } =
+    actions
 export default reducer

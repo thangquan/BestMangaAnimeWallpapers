@@ -18,9 +18,13 @@ const InfoUserPost = ({ data }: Props) => {
         <View style={styles.infoUserPost}>
             <View style={styles.viewAvatar}>
                 <FastImage
-                    source={{
-                        uri: avatarUrl
-                    }}
+                    source={
+                        avatarUrl
+                            ? {
+                                  uri: avatarUrl
+                              }
+                            : Constant.icons.avatarDefault
+                    }
                     style={styles.avatar}
                 />
             </View>
