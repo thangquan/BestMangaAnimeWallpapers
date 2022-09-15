@@ -9,6 +9,7 @@ import {
     NavigationProp,
     StackActions
 } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 
 type Props = {}
 
@@ -16,7 +17,7 @@ const DrawerContent = (props: Props) => {
     const dispatch = useDispatch()
     const navigation = useNavigation()
     const currentCategoryFocus = useSelector((state: any) => state.categorySlice?.currentFocused)
-
+    const { t: lang } = useTranslation()
     const renderItem = ({ item, index }: { item: string; index: number }) => {
         return (
             <TouchableOpacity
@@ -76,7 +77,7 @@ const DrawerContent = (props: Props) => {
                         navigation.navigate(Constant.screenName.Privacy)
                     }}
                 >
-                    <Text style={styles.textPrivacy}>Privacy Policy</Text>
+                    <Text style={styles.textPrivacy}>{lang('profile.privacy')}</Text>
                 </TouchableOpacity>
                 <View style={styles.driver} />
                 <TouchableOpacity
@@ -86,7 +87,7 @@ const DrawerContent = (props: Props) => {
                         navigation.navigate(Constant.screenName.TermsPage)
                     }}
                 >
-                    <Text style={styles.textPrivacy}>Terms & Conditions</Text>
+                    <Text style={styles.textPrivacy}>{lang('profile.terms')}</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
