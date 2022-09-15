@@ -3,13 +3,15 @@ import React from 'react'
 import Constant from '../../controller/Constant'
 import HeaderDefault from '../common/HeaderDefault'
 import { WebView } from 'react-native-webview'
+import { useTranslation } from 'react-i18next'
 
 type Props = {}
 
 const TermsPage = (props: Props) => {
+    const { t } = useTranslation()
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>
-            <HeaderDefault title='Terms & Conditions' />
+            <HeaderDefault title={t('profile.terms')} />
             <View style={styles.contentView}>
                 <WebView source={{ uri: Constant.termsPageURL }} />
             </View>

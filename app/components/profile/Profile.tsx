@@ -10,6 +10,7 @@ import StorageManager from '../../controller/StorageManager'
 import { logoutUser } from '../../redux/userSlice'
 import Util from '../../controller/Util'
 import { useNavigation, StackActions } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 
 const listItem = [
     {
@@ -33,6 +34,11 @@ const listItem = [
         icon: 'ios-help-circle-outline'
     },
     {
+        type: 'language',
+        title: 'Languages',
+        icon: 'language-outline'
+    },
+    {
         id: 4,
         type: 'logout',
         title: 'Logout',
@@ -46,6 +52,7 @@ const Profile = (props: Props) => {
     const dispatch = useDispatch()
     const navigation = useNavigation()
     const currentUser = useSelector((state: any) => state.userSlice.data)
+    const { t: lang } = useTranslation()
 
     const handleOnClickItem = (item: any): void => {
         switch (item.type) {
@@ -58,8 +65,12 @@ const Profile = (props: Props) => {
             case 'help':
                 handleOnHelp()
                 break
+            case 'language':
+                navigation.dispatch(StackActions.push(Constant.screenName.ChangeLanguage))
+                break
             case 'logout':
                 handleOnLogout()
+                break
             default:
                 break
         }
@@ -83,7 +94,7 @@ const Profile = (props: Props) => {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>
-            <HeaderMain title='Profile' />
+            <HeaderMain title={lang('common.profile')} />
             <InfoUser />
             <View style={styles.body}>
                 {listItem.map((item, index) => {
@@ -102,7 +113,7 @@ const Profile = (props: Props) => {
                             }}
                         >
                             <Icon name={item.icon} size={24} color={Constant.color.text} />
-                            <Text style={styles.textItem}>{item.title}</Text>
+                            <Text style={styles.textItem}> {lang(`profile.${item.type}`)}</Text>
                             <Icon
                                 name='caret-forward-circle-outline'
                                 size={26}

@@ -3,7 +3,9 @@ import { Platform } from 'react-native'
 import Constant from './Constant'
 import Toast from 'react-native-toast-message'
 import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions'
-
+import { useTranslation } from 'react-i18next'
+import { refLang } from '../components/navigation/RootNavigation'
+import i18n from '../i18n'
 export default class Util {
     static isAndroid = () => {
         return Platform.OS === 'android'
@@ -15,7 +17,7 @@ export default class Util {
 
     static showAlertSuccess = (title) => {
         Toast.show({
-            text1: 'Notification',
+            text1: i18n.t('common.notification'),
             text2: title,
             visibilityTime: 1000
         })

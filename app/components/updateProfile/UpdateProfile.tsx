@@ -23,6 +23,7 @@ import Util from '../../controller/Util'
 import RNProgressHud from 'progress-hud'
 import { useNavigation } from '@react-navigation/native'
 import { updateCurrentUser } from '../../redux/userSlice'
+import { useTranslation } from 'react-i18next'
 
 type Props = {}
 
@@ -37,6 +38,7 @@ const UpdateProfile = (props: Props) => {
     const [avatar, setAvatar] = useState(currentUser.avatarUrl)
     const [name, setName] = useState<string>(currentUser.name)
     const [isChangeAvatar, setIsChangeAvatar] = useState<boolean>(false)
+    const { t: lang } = useTranslation()
 
     const handlePicImage = async (): Promise<void> => {
         let checkPermissions = await Util.hasLibraryPermission()
@@ -93,7 +95,7 @@ const UpdateProfile = (props: Props) => {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>
-            <HeaderDefault title='Update Profile' />
+            <HeaderDefault title={lang('profile.update')} />
             <View style={styles.body}>
                 <TouchableOpacity onPress={handlePicImage}>
                     <ImageBackground
@@ -110,10 +112,10 @@ const UpdateProfile = (props: Props) => {
                     </ImageBackground>
                 </TouchableOpacity>
                 <Input
-                    label={'Name'}
+                    label={lang('profile.name')}
                     labelStyle={styles.labelStyle}
-                    autoCompleteType='email'
-                    placeholder='Name'
+                    autoCompleteType='default'
+                    placeholder={lang('profile.name')}
                     value={name}
                     keyboardType='default'
                     containerStyle={{
@@ -126,7 +128,7 @@ const UpdateProfile = (props: Props) => {
                     onChangeText={setName}
                 />
                 <ButtonNormal
-                    title='Save'
+                    title={lang('common.save')}
                     containerStyle={{
                         marginTop: 20
                     }}

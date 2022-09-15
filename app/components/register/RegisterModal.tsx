@@ -12,6 +12,7 @@ import auth from '@react-native-firebase/auth'
 import Util from '../../controller/Util'
 import firestore from '@react-native-firebase/firestore'
 import RNProgressHud from 'progress-hud'
+import { useTranslation } from 'react-i18next'
 
 type Props = {}
 
@@ -22,6 +23,7 @@ const RegisterModal = ({}: Props) => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [name, setName] = useState<string>('')
+    const { t: lang } = useTranslation()
 
     const hideModal = (): void => {
         dispatch(updateStateModalRegister(false))
@@ -80,10 +82,10 @@ const RegisterModal = ({}: Props) => {
                 <Text style={styles.title}>Register to Waifu Pictures {'\n'} 😍😍😘😘😍😍😘😘</Text>
                 <View style={styles.formInput}>
                     <Input
-                        label={'Name'}
+                        label={lang('profile.name')}
                         labelStyle={styles.labelStyle}
                         autoCompleteType='email'
-                        placeholder='Name'
+                        placeholder={lang('profile.name')}
                         keyboardType='default'
                         leftIcon={<Icon name='person-outline' size={22} color='gray' />}
                         containerStyle={{
@@ -111,10 +113,10 @@ const RegisterModal = ({}: Props) => {
                         onChangeText={setEmail}
                     />
                     <Input
-                        label={'Password'}
+                        label={lang('auth.password')}
                         autoCompleteType='Password'
                         labelStyle={styles.labelStyle}
-                        placeholder='Password'
+                        placeholder={lang('auth.password')}
                         secureTextEntry={secureTextEntry}
                         renderErrorMessage={false}
                         leftIcon={<Icon name='lock-closed' size={22} color='gray' />}
@@ -142,7 +144,7 @@ const RegisterModal = ({}: Props) => {
                 </View>
                 <View>
                     <ButtonNormal
-                        title='Register'
+                        title={lang('auth.register')}
                         onPress={handleOnClickBtnRegister}
                         containerStyle={{
                             marginTop: 20
@@ -154,7 +156,7 @@ const RegisterModal = ({}: Props) => {
                             dispatch(updateStateModalLogin(true))
                         }}
                     >
-                        <Text style={styles.register}>Login</Text>
+                        <Text style={styles.register}>{lang('auth.login')}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

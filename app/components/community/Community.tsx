@@ -18,24 +18,17 @@ import RegisterModal from '../register/RegisterModal'
 import firestore from '@react-native-firebase/firestore'
 import PostModel from '../../model/PostModel'
 import FirebaseAPIs from '../../controller/Firebase/FirebaseAPIs'
+import { useTranslation } from 'react-i18next'
+import HeaderMain from '../common/HeaderMain'
 
 type Props = {}
 
 const Community = (props: Props) => {
     const [dataPost, setDataPost] = useState<Array<PostModel>>()
     const [isRefreshing, setIsRefreshing] = useState<boolean>(false)
+    const { t: lang } = useTranslation()
 
     const getListPost = async (): Promise<any> => {
-        let data: any = await firestore()
-            .collection(Constant.collection.posts)
-            .orderBy('data.created', 'desc')
-            .get()
-        let listPost = await Promise.all(
-            data._docs.map(async (i: any) => {
-                let user = await FirebaseAPIs.getInfoUser(i._data.idUser)
-                return new PostModel({ ...i._data, user })
-            })
-        )
         const sub = firestore()
             .collection(Constant.collection.posts)
             .orderBy('data.created', 'desc')
@@ -69,7 +62,7 @@ const Community = (props: Props) => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>
             <View style={styles.community}>
-                <HeaderCommunity />
+                <HeaderMain title={lang('common.community')} />
                 <FlatList
                     data={dataPost}
                     renderItem={renderItem}

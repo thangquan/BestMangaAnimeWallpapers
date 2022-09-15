@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import store from './app/redux/store'
 import LoginModal from './app/components/login/LoginModal'
 import RegisterModal from './app/components/register/RegisterModal'
+import './app/i18n'
 
 const App = () => {
     return (

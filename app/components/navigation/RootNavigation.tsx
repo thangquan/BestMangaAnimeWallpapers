@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { createRef, useEffect } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { StackActionType } from '@react-navigation/native'
 import { NavigationContainer } from '@react-navigation/native'
@@ -17,6 +17,8 @@ import StorageManager from '../../controller/StorageManager'
 import { useDispatch } from 'react-redux'
 import { updateCurrentUser } from '../../redux/userSlice'
 import UpdateProfile from '../updateProfile/UpdateProfile'
+import ChangeLanguage from '../changeLanguage/ChangeLanguage'
+import { useTranslation, UseTranslationOptions } from 'react-i18next'
 
 type Props = {}
 
@@ -32,6 +34,7 @@ export type RootRouteProps<RouteName extends keyof RootStackParamList> = RoutePr
 >
 
 const Stack = createNativeStackNavigator()
+export const refLang = createRef<UseTranslationOptions>()
 
 const RootNavigation = (props: Props) => {
     const dispatch = useDispatch()
@@ -63,6 +66,10 @@ const RootNavigation = (props: Props) => {
                 <Stack.Screen name={Constant.screenName.TermsPage} component={TermsPage} />
                 <Stack.Screen name={Constant.screenName.CreatePost} component={CreatePost} />
                 <Stack.Screen name={Constant.screenName.UpdateProfile} component={UpdateProfile} />
+                <Stack.Screen
+                    name={Constant.screenName.ChangeLanguage}
+                    component={ChangeLanguage}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     )
