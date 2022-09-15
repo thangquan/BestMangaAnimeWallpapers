@@ -95,25 +95,21 @@ export default class Util {
     static calculateElapsedTime = (timeCreated) => {
         const created = timeCreated
         let periods = {
-            year: 365 * 30 * 24 * 60 * 60 * 1000,
+            y: 365 * 30 * 24 * 60 * 60 * 1000,
             month: 30 * 24 * 60 * 60 * 1000,
-            week: 7 * 24 * 60 * 60 * 1000,
-            day: 24 * 60 * 60 * 1000,
-            hour: 60 * 60 * 1000,
-            minute: 60 * 1000
+            w: 7 * 24 * 60 * 60 * 1000,
+            d: 24 * 60 * 60 * 1000,
+            h: 60 * 60 * 1000,
+            m: 60 * 1000
         }
         let diff = Date.now() - created
 
         for (const key in periods) {
             if (diff >= periods[key]) {
                 let result = Math.floor(diff / periods[key])
-                if (result == 1) {
-                    return `${result} ${key} ago`
-                } else {
-                    return `${result} ${key}s ago`
-                }
+                return result + i18n.t(`elapsedTime.${key}`)
             }
         }
-        return 'Just now'
+        return i18n.t('elapsedTime.justNow')
     }
 }

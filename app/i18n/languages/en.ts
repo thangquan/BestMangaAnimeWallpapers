@@ -12,6 +12,7 @@ export default {
     profile: {
         update: 'Update profile',
         terms: 'Terms & Conditions',
+        privacy: 'Privacy Policy',
         help: 'Help and support',
         language: 'Languages',
         logout: 'Logout',
@@ -23,5 +24,18 @@ export default {
         login: 'Login',
         register: 'Register',
         password: 'Password'
+    },
+    elapsedTime: {
+        y: 'y',
+        month: 'month',
+        w: 'w',
+        d: 'd',
+        h: 'h',
+        m: 'm',
+        justNow: 'Just now'
+    },
+    reactPost: {
+        like: 'Like',
+        comment: 'Comment'
     }
 }
