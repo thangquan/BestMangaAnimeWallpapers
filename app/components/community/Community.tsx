@@ -36,7 +36,19 @@ const Community = (props: Props) => {
                 return new PostModel({ ...i._data, user })
             })
         )
-        setDataPost(listPost)
+        const sub = firestore()
+            .collection(Constant.collection.posts)
+            .orderBy('data.created', 'desc')
+            .onSnapshot(async (querySnapshot) => {
+                let listPost = await Promise.all(
+                    querySnapshot.docs.map(async (i: any) => {
+                        let user = await FirebaseAPIs.getInfoUser(i._data.idUser)
+                        return new PostModel({ ...i._data, user })
+                    })
+                )
+                setDataPost(listPost)
+            })
+        return sub
     }
 
     useEffect(() => {

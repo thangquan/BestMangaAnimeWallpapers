@@ -7,8 +7,8 @@ export default class PostModel {
     image: string = ''
     idUser: string = ''
     user: any
-    like: number = 0
-    comment: number = 0
+    like: Array<string> = []
+    comment: Array<string> = []
     constructor(dict: any) {
         if (dict === undefined || dict === null) {
             return
@@ -19,5 +19,7 @@ export default class PostModel {
         this.created = dict?.data?.created ?? ''
         this.idUser = dict?.idUser ?? ''
         this.user = dict?.user ?? ''
+        this.like = dict?.like ?? []
+        this.comment = dict?.comment ?? []
     }
 }

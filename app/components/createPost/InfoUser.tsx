@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import FastImage from 'react-native-fast-image'
 import Constant from '../../controller/Constant'
@@ -12,10 +12,14 @@ const InfoUser = (props: Props) => {
     return (
         <View style={styles.infoUserPost}>
             <View style={styles.viewAvatar}>
-                <FastImage
-                    source={{
-                        uri: avatarUrl
-                    }}
+                <Image
+                    source={
+                        avatarUrl
+                            ? {
+                                  uri: avatarUrl
+                              }
+                            : Constant.icons.avatarDefault
+                    }
                     style={styles.avatar}
                 />
             </View>

@@ -95,6 +95,7 @@ const CreatePost = (props: Props) => {
         Util.showAlertSuccess('Create post successful')
         navigation.goBack()
     }
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>
             <View style={styles.container}>
