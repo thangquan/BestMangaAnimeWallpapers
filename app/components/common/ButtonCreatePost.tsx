@@ -13,7 +13,7 @@ type Props = {}
 const ButtonCreatePost = (props: Props) => {
     const navigation = useNavigation()
     const dispatch = useDispatch()
-    const currentUser = useSelector((state): any => state.userSlice?.data)
+    const currentUser = useSelector((state: any) => state.userSlice?.data)
     const handleOnCreatePost = (): void => {
         if (currentUser.id) {
             navigation.navigate(Constant.screenName.CreatePost)

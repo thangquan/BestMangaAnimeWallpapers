@@ -3,38 +3,70 @@ import React, { useEffect, useRef } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Constant from '../../../controller/Constant'
 import PostModel from '../../../model/PostModel'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateStateModalLogin } from '../../../redux/userSlice'
+import firestore from '@react-native-firebase/firestore'
 
 type Props = {
     dataPost: PostModel
 }
 
 const ReactPost = ({ dataPost }: Props) => {
-    const { like, comment } = dataPost
+    const dispatch = useDispatch()
+    const { like, comment, id } = dataPost
+    const currentUser = useSelector((state: any) => state.userSlice?.data)
+    const ref = firestore().collection(Constant.collection.posts).doc(id)
+
+    const handleOnClickLovePost = (): void => {
+        if (!currentUser.id) {
+            dispatch(updateStateModalLogin(true))
+            return
+        }
+        handleOnLovePost()
+    }
+
+    const checkIsLoved = (): boolean => {
+        if (!currentUser.id) {
+            return false
+        }
+        return like.indexOf(currentUser.id) > -1
+    }
+
+    const handleOnLovePost = (): void => {
+        let like = checkIsLoved()
+            ? firestore.FieldValue.arrayRemove(currentUser.id)
+            : firestore.FieldValue.arrayUnion(currentUser.id)
+        ref.set(
+            {
+                like
+            },
+            { merge: true }
+        )
+    }
 
     return (
         <View style={styles.container}>
             <View style={styles.listReact}>
-                <TouchableOpacity
-                    style={styles.btnReact}
-                    onPress={() => {
-                        console.log('123')
-                    }}
-                >
-                    <Icon name='heart' size={30} color={Constant.color.heart} />
+                <TouchableOpacity style={styles.btnReact} onPress={handleOnClickLovePost}>
+                    <Icon
+                        name={checkIsLoved() ? 'heart' : 'heart-outline'}
+                        size={30}
+                        color={checkIsLoved() ? Constant.color.heart : Constant.color.text}
+                    />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.btnReact}>
                     <Icon name='chatbubbles-outline' size={26} color={Constant.color.text} />
                 </TouchableOpacity>
             </View>
             <View style={styles.countReact}>
-                {like ? (
+                {like.length ? (
                     <Text style={styles.textCountLover}>
-                        {like} like{like > 1 && 's'}
+                        {like.length} like{like.length > 1 && 's'}
                     </Text>
                 ) : null}
-                {comment ? (
+                {comment.length ? (
                     <Text style={styles.textCountLover}>
-                        {comment} comment{comment > 1 && 's'}
+                        {comment.length} comment{comment.length > 1 && 's'}
                     </Text>
                 ) : null}
             </View>
@@ -56,7 +88,6 @@ const styles = StyleSheet.create({
     },
     countReact: {
         flexDirection: 'row',
-        backgroundColor: 'red',
         alignItems: 'center'
     },
     textCountLover: {
