@@ -21,7 +21,8 @@ export default Constant = {
         Community: 'Community',
         CreatePost: 'CreatePost',
         Profile: 'Profile',
-        UpdateProfile: 'UpdateProfile'
+        UpdateProfile: 'UpdateProfile',
+        ChangeLanguage: 'ChangeLanguage'
     },
     color: {
         green: '#3FC44E',

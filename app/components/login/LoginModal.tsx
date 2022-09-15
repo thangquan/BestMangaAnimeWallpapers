@@ -18,11 +18,13 @@ import UserModel from '../../model/UserModel'
 import RNProgressHud from 'progress-hud'
 import firestore from '@react-native-firebase/firestore'
 import StorageManager from '../../controller/StorageManager'
+import { useTranslation } from 'react-i18next'
 
 type Props = {}
 
 const LoginModal = ({}: Props) => {
     const dispatch = useDispatch()
+    const { t: lang } = useTranslation()
     const isVisible = useSelector((state: any) => state.userSlice.modalLogin)
     const [secureTextEntry, setSecureTextEntry] = useState(true)
     const [email, setEmail] = useState<string>('mot@mot.mot')
@@ -93,10 +95,10 @@ const LoginModal = ({}: Props) => {
                     />
                     <Input
                         value={password}
-                        label={'Password'}
+                        label={lang('auth.password')}
                         autoCompleteType='Password'
                         labelStyle={styles.labelStyle}
-                        placeholder='Password'
+                        placeholder={lang('auth.password')}
                         secureTextEntry={secureTextEntry}
                         renderErrorMessage={false}
                         leftIcon={<Icon name='lock-closed' size={22} color='gray' />}
@@ -124,7 +126,7 @@ const LoginModal = ({}: Props) => {
                 </View>
                 <View>
                     <ButtonNormal
-                        title='Login'
+                        title={lang('auth.login')}
                         onPress={handleOnClickBtnLogin}
                         containerStyle={{
                             marginTop: 20
@@ -136,7 +138,7 @@ const LoginModal = ({}: Props) => {
                             dispatch(updateStateModalRegister(true))
                         }}
                     >
-                        <Text style={styles.register}>Register</Text>
+                        <Text style={styles.register}>{lang('auth.register')}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

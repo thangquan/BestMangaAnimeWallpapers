@@ -6,11 +6,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import UserModel from '../../../model/UserModel'
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import { updateStateModalLogin, updateStateModalRegister } from '../../../redux/userSlice'
+import { useTranslation } from 'react-i18next'
 
 type Props = {}
 
 const InfoUser = ({}: Props) => {
     const dispatch = useDispatch()
+    const { t: lang } = useTranslation()
     const { avatarUrl, name, email } = useSelector((state: any) => state.userSlice.data)
 
     const handleOnClickBtnLogin = (): void => {
@@ -47,7 +49,7 @@ const InfoUser = ({}: Props) => {
                             handleOnClickBtnLogin()
                         }}
                     >
-                        <Text style={styles.textBtnAuth}>Login</Text>
+                        <Text style={styles.textBtnAuth}>{lang('auth.login')}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.btnAuth}
@@ -55,7 +57,7 @@ const InfoUser = ({}: Props) => {
                             handleOnClickBtnRegister()
                         }}
                     >
-                        <Text style={styles.textBtnAuth}>Register</Text>
+                        <Text style={styles.textBtnAuth}>{lang('auth.register')}</Text>
                     </TouchableOpacity>
                 </View>
             )}
