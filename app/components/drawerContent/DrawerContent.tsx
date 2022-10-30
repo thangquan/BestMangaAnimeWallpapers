@@ -1,4 +1,12 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, SafeAreaView } from 'react-native'
+import {
+    StyleSheet,
+    Text,
+    View,
+    FlatList,
+    TouchableOpacity,
+    SafeAreaView,
+    StatusBar
+} from 'react-native'
 import React from 'react'
 import Constant from './../../controller/Constant'
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,6 +26,8 @@ const DrawerContent = (props: Props) => {
     const navigation = useNavigation()
     const currentCategoryFocus = useSelector((state: any) => state.categorySlice?.currentFocused)
     const { t: lang } = useTranslation()
+    const isDarkMode = useSelector((state: any) => state.themeSlice.isDarkMode)
+
     const renderItem = ({ item, index }: { item: string; index: number }) => {
         return (
             <TouchableOpacity
@@ -60,6 +70,11 @@ const DrawerContent = (props: Props) => {
                 backgroundColor: Constant.color.backgroundColor
             }}
         >
+            <StatusBar
+                barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+                hidden={false}
+                translucent={true}
+            />
             <View style={styles.drawerContent}>
                 <Text style={styles.title}>Waifu Pictures</Text>
                 <FlatList

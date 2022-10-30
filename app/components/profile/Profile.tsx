@@ -1,4 +1,12 @@
-import { StyleSheet, Text, TouchableOpacity, View, SafeAreaView, Linking } from 'react-native'
+import {
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+    SafeAreaView,
+    Linking,
+    StatusBar
+} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Constant from './../../controller/Constant'
 import InfoUser from './components/InfoUser'
@@ -9,8 +17,10 @@ import auth from '@react-native-firebase/auth'
 import StorageManager from '../../controller/StorageManager'
 import { logoutUser } from '../../redux/userSlice'
 import Util from '../../controller/Util'
+import { Switch } from 'react-native-switch'
 import { useNavigation, StackActions } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
+import { switchTheme } from '../../redux/themeSlice'
 
 const listItem = [
     {
@@ -53,6 +63,8 @@ const Profile = (props: Props) => {
     const navigation = useNavigation()
     const currentUser = useSelector((state: any) => state.userSlice.data)
     const { t: lang } = useTranslation()
+    const isDarkMode = useSelector((state: any) => state.themeSlice.isDarkMode)
+    const colors = useSelector((state: any) => state.themeSlice.colors)
 
     const handleOnClickItem = (item: any): void => {
         switch (item.type) {
@@ -92,11 +104,30 @@ const Profile = (props: Props) => {
         dispatch(logoutUser(null))
     }
 
+    const toggleMode = (): void => {
+        dispatch(switchTheme(!isDarkMode))
+    }
+
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
             <HeaderMain title={lang('common.profile')} />
             <InfoUser />
             <View style={styles.body}>
+                <View style={styles.item}>
+                    <Icon name={'color-palette-outline'} size={24} color={colors.text} />
+                    <Text style={{ ...styles.textItem, color: colors.text }}>Dark mode</Text>
+                    <Switch
+                        backgroundActive={'#81b0ff'}
+                        backgroundInactive={'#767577'}
+                        renderActiveText={false}
+                        renderInActiveText={false}
+                        circleActiveColor={'#81b0ff'}
+                        circleInActiveColor={'#f4f3f4'}
+                        value={isDarkMode}
+                        onValueChange={toggleMode}
+                        circleSize={26}
+                    />
+                </View>
                 {listItem.map((item, index) => {
                     if (item.type == 'update' || item.type == 'logout') {
                         if (!currentUser.id) {
@@ -112,12 +143,14 @@ const Profile = (props: Props) => {
                                 handleOnClickItem(item)
                             }}
                         >
-                            <Icon name={item.icon} size={24} color={Constant.color.text} />
-                            <Text style={styles.textItem}> {lang(`profile.${item.type}`)}</Text>
+                            <Icon name={item.icon} size={24} color={colors.text} />
+                            <Text style={{ ...styles.textItem, color: colors.text }}>
+                                {lang(`profile.${item.type}`)}
+                            </Text>
                             <Icon
                                 name='caret-forward-circle-outline'
                                 size={26}
-                                color={Constant.color.text}
+                                color={colors.text}
                             />
                         </TouchableOpacity>
                     )
@@ -145,7 +178,7 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: Constant.color.grayText,
         borderRadius: 10,
-        paddingHorizontal: 10,
+        paddingHorizontal: 14,
         marginTop: 14,
         flexDirection: 'row',
         alignItems: 'center'

@@ -14,6 +14,7 @@ const InfoUser = ({}: Props) => {
     const dispatch = useDispatch()
     const { t: lang } = useTranslation()
     const { avatarUrl, name, email } = useSelector((state: any) => state.userSlice.data)
+    const colors = useSelector((state: any) => state.themeSlice.colors)
 
     const handleOnClickBtnLogin = (): void => {
         dispatch(updateStateModalLogin(true))
@@ -38,7 +39,7 @@ const InfoUser = ({}: Props) => {
             />
             {email ? (
                 <View style={styles.description}>
-                    <Text style={styles.name}>{name}</Text>
+                    <Text style={{ ...styles.name, color: colors.text }}>{name}</Text>
                     <Text style={styles.email}>{email}</Text>
                 </View>
             ) : (

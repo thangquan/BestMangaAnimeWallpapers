@@ -19,6 +19,7 @@ import { updateCurrentUser } from '../../redux/userSlice'
 import UpdateProfile from '../updateProfile/UpdateProfile'
 import ChangeLanguage from '../changeLanguage/ChangeLanguage'
 import { useTranslation, UseTranslationOptions } from 'react-i18next'
+import { getTheme } from '../../redux/themeSlice'
 
 type Props = {}
 
@@ -48,6 +49,7 @@ const RootNavigation = (props: Props) => {
 
     useEffect(() => {
         loading()
+        dispatch(getTheme())
     }, [])
     return (
         <NavigationContainer>

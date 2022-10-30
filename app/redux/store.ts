@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import categorySlice from './categorySlice'
 import userSlice from './userSlice'
+import themeSlice from './themeSlice'
 
 const rootReducer = {
     categorySlice,
-    userSlice
+    userSlice,
+    themeSlice
 }
 
 const store = configureStore({

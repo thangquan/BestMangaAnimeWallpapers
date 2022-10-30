@@ -15,6 +15,7 @@ const ListCategory = ({ data }: Props) => {
     const dispatch = useDispatch()
     const refFlatList = useRef<FlatList>(null)
     const indexCategoryFocus = useSelector((state: any) => state.categorySlice.currentIndex)
+    const colors = useSelector((state: any) => state.themeSlice.colors)
 
     const renderItem = ({ item, index }: { item: string; index: number }) => (
         <TouchableOpacity
@@ -29,7 +30,7 @@ const ListCategory = ({ data }: Props) => {
             <Text
                 style={{
                     ...styles.textCategory,
-                    color: indexCategoryFocus == index ? '#000' : '#fff'
+                    color: indexCategoryFocus == index ? '#000' : colors.text
                 }}
             >
                 {item}

@@ -20,6 +20,7 @@ import PostModel from '../../model/PostModel'
 import FirebaseAPIs from '../../controller/Firebase/FirebaseAPIs'
 import { useTranslation } from 'react-i18next'
 import HeaderMain from '../common/HeaderMain'
+import { useSelector } from 'react-redux'
 
 type Props = {}
 
@@ -27,6 +28,7 @@ const Community = (props: Props) => {
     const [dataPost, setDataPost] = useState<Array<PostModel>>()
     const [isRefreshing, setIsRefreshing] = useState<boolean>(false)
     const { t: lang } = useTranslation()
+    const colors = useSelector((state: any) => state.themeSlice.colors)
 
     const getListPost = async (): Promise<any> => {
         const sub = firestore()
@@ -60,8 +62,8 @@ const Community = (props: Props) => {
     const renderItem = ({ item }: { item: PostModel }) => <Post dataPost={item} />
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>
-            <View style={styles.community}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
+            <View style={{ ...styles.community, backgroundColor: colors.backgroundColor }}>
                 <HeaderMain title={lang('common.community')} />
                 <FlatList
                     data={dataPost}

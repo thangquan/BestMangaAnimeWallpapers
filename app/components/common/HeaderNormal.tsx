@@ -3,11 +3,13 @@ import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Constant from '../../controller/Constant'
 import { DrawerActions, useNavigation } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
 
 type Props = {}
 
 const HeaderNormal = (props: Props) => {
     const navigation = useNavigation()
+    const colors = useSelector((state: any) => state.themeSlice.colors)
 
     return (
         <View style={styles.header}>
@@ -16,14 +18,14 @@ const HeaderNormal = (props: Props) => {
                     navigation.dispatch(DrawerActions.toggleDrawer())
                 }}
             >
-                <Text style={styles.txtHeader}>Waifu Pictures</Text>
+                <Text style={{ ...styles.txtHeader, color: colors.text }}>Waifu Pictures</Text>
             </Pressable>
             <TouchableOpacity
                 onPress={() => {
                     navigation.dispatch(DrawerActions.toggleDrawer())
                 }}
             >
-                <Icon name='options' size={24} color={'#fff'} />
+                <Icon name='options' size={24} color={colors.text} />
             </TouchableOpacity>
         </View>
     )

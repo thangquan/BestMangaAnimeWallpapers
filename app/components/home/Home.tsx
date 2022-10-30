@@ -17,6 +17,7 @@ const Home = (props: Props) => {
     const [listCategory, setListCategory] = useState<any[]>(Constant.categories)
     const [loading, setLoading] = useState<boolean>(false)
     const currentCategoryFocus = useSelector((state: any) => state.categorySlice?.currentFocused)
+    const colors = useSelector((state: any) => state.themeSlice.colors)
 
     const onEndReached = (): void => {
         CommonAPIs.getImageByCategory(currentCategoryFocus)
@@ -47,8 +48,8 @@ const Home = (props: Props) => {
     }, [currentCategoryFocus])
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>
-            <View style={styles.container}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
+            <View style={{ ...styles.container, backgroundColor: colors.backgroundColor }}>
                 <HeaderNormal />
                 <ListCategory data={listCategory} />
                 {loading ? (
