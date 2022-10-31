@@ -1,4 +1,5 @@
 import Constant from '../Constant'
+import Config from 'react-native-config'
 
 export default class BaseAPIs {
     static baseURL = Constant.baseURL
@@ -8,7 +9,7 @@ export default class BaseAPIs {
 
     static getHeadersRapidapi() {
         return {
-            'X-RapidAPI-Key': '705e77c12bmsh40fb806cf9aa882p151a96jsnf4fed1616dc6',
+            'X-RapidAPI-Key': Config.RAPIDAPI_KEY,
             'X-RapidAPI-Host': 'best-manga-anime-wallpapers.p.rapidapi.com'
         }
     }

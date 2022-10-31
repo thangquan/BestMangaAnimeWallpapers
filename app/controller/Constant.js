@@ -1,8 +1,8 @@
 import { Dimensions } from 'react-native'
-// import Config from 'react-native-config'
+import Config from 'react-native-config'
 
 export default Constant = {
-    baseURL: 'https://best-manga-anime-wallpapers.p.rapidapi.com/',
+    baseURL: Config.BASE_URL,
     privacyURL: 'https://pages.flycricket.io/waifu-pictures-0/privacy.html',
     termsPageURL: 'https://pages.flycricket.io/waifu-pictures-0/terms.html',
     mailAdmin: 'thangpaisen@gmail.com',

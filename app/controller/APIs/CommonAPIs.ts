@@ -6,7 +6,7 @@ import BaseAPIs from './BaseAPIs'
 export default class CommonAPIs extends BaseAPIs {
     static baseURL = Constant.baseURL
 
-    static endpoints = {
+    static endpoints: any = {
         getAllPopular: Constant.baseURL,
         getImageByCategory: this.waifuURL + '/many/sfw'
     }
