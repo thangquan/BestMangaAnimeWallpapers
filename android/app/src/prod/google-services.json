@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "503930183191",
+    "project_id": "waifu-pictures-prod",
+    "storage_bucket": "waifu-pictures-prod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503930183191:android:518648e8a960f3b06e4652",
+        "android_client_info": {
+          "package_name": "com.bestmangaanimewallpapers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503930183191-7iu2kglpahslktns9gm7r7cnv9ffrd97.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7ZcF8AchMim9O0VfUw7Mv3RZa5ATWviI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503930183191-7iu2kglpahslktns9gm7r7cnv9ffrd97.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

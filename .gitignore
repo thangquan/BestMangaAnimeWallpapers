@@ -150,6 +150,6 @@ ios/Podfile.lock
 # env
 .env
 .env.dev
-.env.production
+.env.prod
 
 *.keystore
