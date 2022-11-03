@@ -39,6 +39,8 @@
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) uses library</string>
+	<key>CodePushDeploymentKey</key>
+	<string>0kjIV2LbACUuU7bZZJwg987DmnTY0W4iLgPbW</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

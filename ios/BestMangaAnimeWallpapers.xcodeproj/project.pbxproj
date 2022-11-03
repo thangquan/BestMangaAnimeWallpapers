@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* BestMangaAnimeWallpapersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* BestMangaAnimeWallpapersTests.m */; };
+		049248F62914161C00ACB24B /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 049248F52914161C00ACB24B /* AppCenter-Config.plist */; };
+		049248F72914161C00ACB24B /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 049248F52914161C00ACB24B /* AppCenter-Config.plist */; };
 		04A0E21A2912BBF400F06B09 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		04A0E21B2912BBF400F06B09 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		04A0E21F2912BBF400F06B09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -67,6 +69,7 @@
 		00E356EE1AD99517003FC87E /* BestMangaAnimeWallpapersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BestMangaAnimeWallpapersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* BestMangaAnimeWallpapersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BestMangaAnimeWallpapersTests.m; sourceTree = "<group>"; };
+		049248F52914161C00ACB24B /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		04A0E2372912BBF400F06B09 /* BestMangaAnimeWallpapersProd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BestMangaAnimeWallpapersProd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A0E23E2912C26600F06B09 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		04A0E2472912CA6000F06B09 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -167,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				04A0E23E2912C26600F06B09 /* GoogleService-Info.plist */,
-				13B07FB61A68108700A75B9A /* Info.plist */,
 			);
 			path = dev;
 			sourceTree = "<group>";
@@ -175,11 +177,13 @@
 		13B07FAE1A68108700A75B9A /* BestMangaAnimeWallpapers */ = {
 			isa = PBXGroup;
 			children = (
+				049248F52914161C00ACB24B /* AppCenter-Config.plist */,
 				04A0E2492912CA9A00F06B09 /* dev */,
 				04A0E2462912CA5200F06B09 /* prod */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -389,6 +393,7 @@
 				04A0E2222912BBF400F06B09 /* Poppins-Light.ttf in Resources */,
 				04A0E2232912BBF400F06B09 /* Poppins-Medium.ttf in Resources */,
 				04A0E2242912BBF400F06B09 /* Poppins-Regular.ttf in Resources */,
+				049248F72914161C00ACB24B /* AppCenter-Config.plist in Resources */,
 				04A0E2252912BBF400F06B09 /* Poppins-SemiBold.ttf in Resources */,
 				04A0E2262912BBF400F06B09 /* Poppins-Thin.ttf in Resources */,
 				04A0E2272912BBF400F06B09 /* RobotoSlab-Black.ttf in Resources */,
@@ -414,6 +419,7 @@
 				74E582CBC5F44E17892D4522 /* Poppins-Light.ttf in Resources */,
 				1058C1CDAD5A41F8880DB4D7 /* Poppins-Medium.ttf in Resources */,
 				C6D6CB28EE404C0399D79E70 /* Poppins-Regular.ttf in Resources */,
+				049248F62914161C00ACB24B /* AppCenter-Config.plist in Resources */,
 				8AF5501E05214C408AA4819B /* Poppins-SemiBold.ttf in Resources */,
 				FAC86757D8464127857AB5ED /* Poppins-Thin.ttf in Resources */,
 				8DC284C120324B0AA8245065 /* RobotoSlab-Black.ttf in Resources */,
@@ -717,7 +723,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H3MMR5UR75;
+				DEVELOPMENT_TEAM = M285M5TN3T;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/prod/InfoProd.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Waifu Pictures Prod";
@@ -745,7 +751,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H3MMR5UR75;
+				DEVELOPMENT_TEAM = M285M5TN3T;
 				INFOPLIST_FILE = "$(SRCROOT)/prod/InfoProd.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Waifu Pictures Prod";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -771,9 +777,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H3MMR5UR75;
+				DEVELOPMENT_TEAM = M285M5TN3T;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "$(SRCROOT)/dev/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Waifu Pictures Dev";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -799,8 +805,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H3MMR5UR75;
-				INFOPLIST_FILE = "$(SRCROOT)/dev/Info.plist";
+				DEVELOPMENT_TEAM = M285M5TN3T;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Waifu Pictures Dev";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
