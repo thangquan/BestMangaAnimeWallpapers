@@ -9,6 +9,7 @@ import store from './app/redux/store'
 import LoginModal from './app/components/login/LoginModal'
 import RegisterModal from './app/components/register/RegisterModal'
 import './app/i18n'
+import codePush from 'react-native-code-push'
 
 const App = () => {
     return (
@@ -21,7 +22,7 @@ const App = () => {
     )
 }
 
-export default App
+export default codePush(App)
 
 const styles = StyleSheet.create({
     container: {
