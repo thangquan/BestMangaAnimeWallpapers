@@ -11,8 +11,10 @@
         "ios": "react-native run-ios",
         "ios:dev": "npx react-native run-ios --scheme 'BestMangaAnimeWallpapers'",
         "ios:prod": "npx react-native run-ios --scheme 'BestMangaAnimeWallpapersProd'",
-        "codePush staging": "appcenter codepush release-react -a thangpaisen/Waifu-Pictures-Ios -d Staging -m",
-        "codePush Production": "appcenter codepush release-react -a thangpaisen/Waifu-Pictures-Ios -d Production -m",
+        "codePush ios staging": "appcenter codepush release-react -a thangpaisen/Waifu-Pictures-Ios -d Staging -m",
+        "codePush ios Production": "appcenter codepush release-react -a thangpaisen/Waifu-Pictures-Ios -d Production -m",
+        "codePush android staging": "appcenter codepush release-react -a thangpaisen/Waifu-Pictures-Android -d Staging -m -t=1.0",
+        "codePush android Production": "appcenter codepush release-react -a thangpaisen/Waifu-Pictures-Android -d Production -m -t=1.0.2",
         "start": "react-native start",
         "test": "jest",
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx"

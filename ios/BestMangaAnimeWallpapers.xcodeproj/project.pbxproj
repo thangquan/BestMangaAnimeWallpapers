@@ -31,6 +31,8 @@
 		04A0E2302912BBF400F06B09 /* RobotoSlab-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 30584A0329EB4B72A442AA60 /* RobotoSlab-Thin.ttf */; };
 		04A0E23F2912C26600F06B09 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04A0E23E2912C26600F06B09 /* GoogleService-Info.plist */; };
 		04A0E24C2912D3FF00F06B09 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04A0E2472912CA6000F06B09 /* GoogleService-Info.plist */; };
+		04AE0EF12917D99800D132FB /* InfoProd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04A0E24A2912CB0800F06B09 /* InfoProd.plist */; };
+		04AE0EF32917D9B400D132FB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB61A68108700A75B9A /* Info.plist */; };
 		1058C1CDAD5A41F8880DB4D7 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46FFCB8DD6C049F39A470112 /* Poppins-Medium.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -392,6 +394,7 @@
 				04A0E2212912BBF400F06B09 /* Poppins-Bold.ttf in Resources */,
 				04A0E2222912BBF400F06B09 /* Poppins-Light.ttf in Resources */,
 				04A0E2232912BBF400F06B09 /* Poppins-Medium.ttf in Resources */,
+				04AE0EF12917D99800D132FB /* InfoProd.plist in Resources */,
 				04A0E2242912BBF400F06B09 /* Poppins-Regular.ttf in Resources */,
 				049248F72914161C00ACB24B /* AppCenter-Config.plist in Resources */,
 				04A0E2252912BBF400F06B09 /* Poppins-SemiBold.ttf in Resources */,
@@ -421,6 +424,7 @@
 				C6D6CB28EE404C0399D79E70 /* Poppins-Regular.ttf in Resources */,
 				049248F62914161C00ACB24B /* AppCenter-Config.plist in Resources */,
 				8AF5501E05214C408AA4819B /* Poppins-SemiBold.ttf in Resources */,
+				04AE0EF32917D9B400D132FB /* Info.plist in Resources */,
 				FAC86757D8464127857AB5ED /* Poppins-Thin.ttf in Resources */,
 				8DC284C120324B0AA8245065 /* RobotoSlab-Black.ttf in Resources */,
 				69968E0038ED4622BA12FD99 /* RobotoSlab-Bold.ttf in Resources */,
