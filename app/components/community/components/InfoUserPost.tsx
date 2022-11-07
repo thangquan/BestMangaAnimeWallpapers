@@ -41,7 +41,7 @@ const InfoUserPost = ({ data }: Props) => {
     )
 }
 
-export default InfoUserPost
+export default React.memo(InfoUserPost)
 
 const styles = StyleSheet.create({
     infoUserPost: {

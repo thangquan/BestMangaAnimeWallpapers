@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Constant from '../../../controller/Constant'
 import PostModel from '../../../model/PostModel'
@@ -13,9 +13,22 @@ type Props = {
 
 const ReactPost = ({ dataPost }: Props) => {
     const dispatch = useDispatch()
-    const { like, comment, id } = dataPost
+    const { comment, id } = dataPost
     const currentUser = useSelector((state: any) => state.userSlice?.data)
     const ref = firestore().collection(Constant.collection.posts).doc(id)
+    const [countLove, setCountLove] = useState<number>(0)
+    const [isLoved, setIsLoved] = useState<boolean>(false)
+
+    useEffect(() => {
+        ref.onSnapshot((docs) => {
+            setCountLove(docs.data()?.like?.length)
+            if (!currentUser?.id) {
+                setIsLoved(false)
+            } else {
+                setIsLoved(docs.data()?.like?.indexOf(currentUser.id) > -1)
+            }
+        })
+    }, [currentUser])
 
     const handleOnClickLovePost = (): void => {
         if (!currentUser.id) {
@@ -25,15 +38,8 @@ const ReactPost = ({ dataPost }: Props) => {
         handleOnLovePost()
     }
 
-    const checkIsLoved = (): boolean => {
-        if (!currentUser.id) {
-            return false
-        }
-        return like.indexOf(currentUser.id) > -1
-    }
-
     const handleOnLovePost = (): void => {
-        let like = checkIsLoved()
+        let like = isLoved
             ? firestore.FieldValue.arrayRemove(currentUser.id)
             : firestore.FieldValue.arrayUnion(currentUser.id)
         ref.set(
@@ -49,9 +55,9 @@ const ReactPost = ({ dataPost }: Props) => {
             <View style={styles.listReact}>
                 <TouchableOpacity style={styles.btnReact} onPress={handleOnClickLovePost}>
                     <Icon
-                        name={checkIsLoved() ? 'heart' : 'heart-outline'}
+                        name={isLoved ? 'heart' : 'heart-outline'}
                         size={30}
-                        color={checkIsLoved() ? Constant.color.heart : Constant.color.text}
+                        color={isLoved ? Constant.color.heart : Constant.color.text}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.btnReact}>
@@ -59,9 +65,9 @@ const ReactPost = ({ dataPost }: Props) => {
                 </TouchableOpacity>
             </View>
             <View style={styles.countReact}>
-                {like.length ? (
+                {countLove ? (
                     <Text style={styles.textCountLover}>
-                        {like.length} like{like.length > 1 && 's'}
+                        {countLove} like{countLove > 1 && 's'}
                     </Text>
                 ) : null}
                 {comment.length ? (

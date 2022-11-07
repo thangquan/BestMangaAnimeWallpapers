@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import InfoUserPost from './InfoUserPost'
 import ImagePost from './ImagePost'
 import Constant from '../../../controller/Constant'
@@ -24,7 +24,7 @@ const Post = ({ dataPost }: Props) => {
     )
 }
 
-export default Post
+export default React.memo(Post)
 
 const styles = StyleSheet.create({
     post: {
