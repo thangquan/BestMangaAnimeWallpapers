@@ -24,15 +24,21 @@ import HeaderMain from '../common/HeaderMain'
 type Props = {}
 
 const Community = (props: Props) => {
-    const [dataPost, setDataPost] = useState<Array<PostModel>>()
+    const [dataPost, setDataPost] = useState<Array<PostModel>>([])
+
     const [isRefreshing, setIsRefreshing] = useState<boolean>(false)
     const { t: lang } = useTranslation()
+    const [lastDocument, setLastDocument] = useState<any>()
 
     const getListPost = async (): Promise<any> => {
-        const sub = firestore()
+        let query = firestore()
             .collection(Constant.collection.posts)
             .orderBy('data.created', 'desc')
-            .onSnapshot(async (querySnapshot) => {
+        query
+            .limit(5)
+            .get()
+            .then(async (querySnapshot: any) => {
+                setLastDocument(querySnapshot.docs[querySnapshot.docs.length - 1])
                 let listPost = await Promise.all(
                     querySnapshot.docs.map(async (i: any) => {
                         let user = await FirebaseAPIs.getInfoUser(i._data.idUser)
@@ -41,23 +47,43 @@ const Community = (props: Props) => {
                 )
                 setDataPost(listPost)
             })
-        return sub
+            .finally(() => {
+                setIsRefreshing(false)
+            })
+    }
+
+    const onRefresh = (): void => {
+        setIsRefreshing(true)
+        getListPost()
+    }
+
+    const renderItem = ({ item }: { item: PostModel }) => <Post dataPost={item} />
+
+    const onEndReached = (): void => {
+        let query = firestore()
+            .collection(Constant.collection.posts)
+            .orderBy('data.created', 'desc')
+        if (lastDocument !== undefined) {
+            query = query.startAfter(lastDocument)
+        }
+        query
+            .limit(5)
+            .get()
+            .then(async (querySnapshot: any) => {
+                setLastDocument(querySnapshot.docs[querySnapshot.docs.length - 1])
+                let listPost = await Promise.all(
+                    querySnapshot.docs.map(async (i: any) => {
+                        let user = await FirebaseAPIs.getInfoUser(i._data.idUser)
+                        return new PostModel({ ...i._data, user })
+                    })
+                )
+                setDataPost((prev) => prev?.concat(listPost))
+            })
     }
 
     useEffect(() => {
         getListPost()
     }, [])
-
-    const onRefresh = (): number => {
-        setIsRefreshing(true)
-        let time = setTimeout(() => {
-            setIsRefreshing(false)
-        }, 700)
-        getListPost()
-        return time
-    }
-
-    const renderItem = ({ item }: { item: PostModel }) => <Post dataPost={item} />
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>
@@ -76,6 +102,7 @@ const Community = (props: Props) => {
                             tintColor={Constant.color.text}
                         />
                     }
+                    onEndReached={onEndReached}
                 />
                 <ButtonCreatePost />
             </View>
