@@ -1,26 +1,14 @@
-import {
-    FlatList,
-    StyleSheet,
-    Text,
-    View,
-    Animated,
-    Easing,
-    SafeAreaView,
-    RefreshControl,
-} from 'react-native'
-import React, { createRef, useEffect, useRef, useState } from 'react'
-import Constant from '../../controller/Constant'
-import HeaderCommunity from './components/HeaderCommunity'
-import Post from './components/Post'
-import ButtonCreatePost from '../common/ButtonCreatePost'
-import LoginModal from '../login/LoginModal'
-import RegisterModal from '../register/RegisterModal'
 import firestore from '@react-native-firebase/firestore'
-import PostModel from '../../model/PostModel'
-import FirebaseAPIs from '../../controller/Firebase/FirebaseAPIs'
-import { useTranslation } from 'react-i18next'
-import HeaderMain from '../common/HeaderMain'
 import { useNavigation } from '@react-navigation/native'
+import React, { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { FlatList, RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native'
+import Constant from '../../controller/Constant'
+import FirebaseAPIs from '../../controller/Firebase/FirebaseAPIs'
+import PostModel from '../../model/PostModel'
+import ButtonCreatePost from '../common/ButtonCreatePost'
+import HeaderMain from '../common/HeaderMain'
+import Post from './components/Post'
 
 type Props = {}
 
