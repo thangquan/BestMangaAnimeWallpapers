@@ -6,6 +6,8 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import UserModel from '../../../model/UserModel'
 import PostModel from '../../../model/PostModel'
 import Util from '../../../controller/Util'
+import { refActionPostSheet } from './ActionSheetPost'
+import { useSelector } from 'react-redux'
 
 type Props = {
     data: PostModel
@@ -13,6 +15,14 @@ type Props = {
 
 const InfoUserPost = ({ data }: Props) => {
     const { name, avatarUrl } = data?.user
+    const currentUser: UserModel = useSelector((state: any) => state.userSlice?.data)
+    const handleActionPost = (): void => {
+        refActionPostSheet.current?.open()
+    }
+
+    const checkIsMyPost = (): boolean => {
+        return currentUser.id == data.idUser
+    }
 
     return (
         <View style={styles.infoUserPost}>
@@ -21,7 +31,7 @@ const InfoUserPost = ({ data }: Props) => {
                     source={
                         avatarUrl
                             ? {
-                                  uri: avatarUrl
+                                  uri: avatarUrl,
                               }
                             : Constant.icons.avatarDefault
                     }
@@ -32,11 +42,13 @@ const InfoUserPost = ({ data }: Props) => {
                 <Text style={styles.name}>{name}</Text>
                 <Text style={styles.timePost}>{Util.calculateElapsedTime(data.created)}</Text>
             </View>
-            <View style={styles.morePost}>
-                <TouchableOpacity style={styles.btnMorePost}>
-                    <Icon name='ellipsis-horizontal' size={26} color={Constant.color.text} />
-                </TouchableOpacity>
-            </View>
+            {checkIsMyPost() && (
+                <View style={styles.morePost}>
+                    <TouchableOpacity style={styles.btnMorePost} onPress={handleActionPost}>
+                        <Icon name='ellipsis-horizontal' size={26} color={Constant.color.text} />
+                    </TouchableOpacity>
+                </View>
+            )}
         </View>
     )
 }
@@ -45,35 +57,35 @@ export default React.memo(InfoUserPost)
 
 const styles = StyleSheet.create({
     infoUserPost: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     viewAvatar: {},
     avatar: {
         width: 50,
         height: 50,
-        borderRadius: 50
+        borderRadius: 50,
     },
     viewName: {
         marginLeft: 6,
-        paddingVertical: 4
+        paddingVertical: 4,
     },
     name: {
         fontSize: 16,
         color: Constant.color.text,
-        fontFamily: Constant.fonts.robotoSlabMedium
+        fontFamily: Constant.fonts.robotoSlabMedium,
     },
     timePost: {
         marginTop: 2,
         color: Constant.color.grayText,
         fontFamily: Constant.fonts.robotoSlabRegular,
-        fontSize: 12
+        fontSize: 12,
     },
     morePost: {
         alignSelf: 'center',
         flex: 1,
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
     },
     btnMorePost: {
-        paddingVertical: 4
-    }
+        paddingVertical: 4,
+    },
 })

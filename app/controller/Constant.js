@@ -8,7 +8,7 @@ export default Constant = {
     mailAdmin: 'thangpaisen@gmail.com',
     screen: {
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height
+        height: Dimensions.get('window').height,
     },
     screenName: {
         TabBarNavigation: 'TabBarNavigation',
@@ -22,7 +22,7 @@ export default Constant = {
         CreatePost: 'CreatePost',
         Profile: 'Profile',
         UpdateProfile: 'UpdateProfile',
-        ChangeLanguage: 'ChangeLanguage'
+        ChangeLanguage: 'ChangeLanguage',
     },
     color: {
         green: '#3FC44E',
@@ -43,17 +43,17 @@ export default Constant = {
         whiteText: '#ffffff',
         whiteBackground: '#ffffff',
         heart: '#fc6157',
-        grayBG: '#2E2E2E'
+        grayBG: '#2E2E2E',
     },
     keys: {
-        currentUser: 'currentUser'
+        currentUser: 'currentUser',
     },
     icons: {
         gifLoading: require('../assets/images/loading.gif'),
         loading: require('../assets/images/ic_loading.png'),
         loadingCute: require('../assets/images/loading_cute.gif'),
         loadingFooter: require('../assets/images/loading_footer.gif'),
-        avatarDefault: require('../assets/images/ic_avatar_default.png')
+        avatarDefault: require('../assets/images/ic_avatar_default.png'),
     },
     fonts: {
         poppinsBold: 'Poppins-Bold',
@@ -66,12 +66,12 @@ export default Constant = {
         robotoSlabRegular: 'RobotoSlab-Regular',
         robotoSlabSemiBold: 'RobotoSlab-SemiBold',
         robotoSlabMedium: 'RobotoSlab-Medium',
-        robotoSlabThin: 'RobotoSlab-Thin'
+        robotoSlabThin: 'RobotoSlab-Thin',
     },
     dateFormatter: {
         ddMMHHmm: 'dd/MM HH:mm',
         ddMMyyyyHHmm: 'dd/MM/yyyy HH:mm',
-        yyyyMMddHHmm: 'yyyy-MM-dd HH:mm'
+        yyyyMMddHHmm: 'yyyy-MM-dd HH:mm',
     },
     categories: [
         'waifu',
@@ -103,13 +103,13 @@ export default Constant = {
         'wink',
         'poke',
         'dance',
-        'cringe'
+        'cringe',
     ],
     keys: {
-        currentUser: 'currentUser'
+        currentUser: 'currentUser',
     },
     collection: {
         users: 'Users',
-        posts: 'Posts'
-    }
+        posts: 'Posts',
+    },
 }
