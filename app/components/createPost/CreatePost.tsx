@@ -32,7 +32,7 @@ const CreatePost = (props: Props) => {
         }
         ImagePicker.openPicker({
             mediaType: 'photo',
-            forceJpg: true
+            forceJpg: true,
         }).then((image: any) => {
             setImageTmp(image)
         })
@@ -74,9 +74,9 @@ const CreatePost = (props: Props) => {
                 data: {
                     title: textContent.trim(),
                     image: urlImage,
-                    created: new Date().getTime()
+                    created: new Date().getTime(),
                 },
-                idUser: currentUser.id
+                idUser: currentUser.id,
             })
             .then(() => {
                 handleCreatePostSuccess()
@@ -127,12 +127,12 @@ export default CreatePost
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     textInput: {
         fontSize: 16,
         padding: 20,
         fontFamily: Constant.fonts.poppinsRegular,
-        color: Constant.color.text
-    }
+        color: Constant.color.text,
+    },
 })
