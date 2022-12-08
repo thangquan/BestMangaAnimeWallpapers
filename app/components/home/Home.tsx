@@ -1,14 +1,15 @@
-import { FlatList, StyleSheet, Text, View, Image, SafeAreaView } from 'react-native'
-import React, { createRef, useEffect, useState } from 'react'
-import HeaderNormal from '../common/HeaderNormal'
+import dynamicLinks from '@react-native-firebase/dynamic-links'
+import React, { useEffect, useState } from 'react'
+import { FlatList, SafeAreaView, StyleSheet, View } from 'react-native'
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
+import { useSelector } from 'react-redux'
 import CommonAPIs from '../../controller/APIs/CommonAPIs'
 import CardImage from '../common/CardImage'
-import ListCategory from './ListCategory'
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
+import HeaderNormal from '../common/HeaderNormal'
+import LoadingFooter from '../common/LoadingFooter'
 import Constant from './../../controller/Constant'
 import Loading from './../common/Loading'
-import LoadingFooter from '../common/LoadingFooter'
-import { useDispatch, useSelector } from 'react-redux'
+import ListCategory from './ListCategory'
 
 type Props = {}
 
@@ -34,13 +35,25 @@ const Home = (props: Props) => {
             .then((res) => {
                 setData(res)
             })
-            .catch((err) => {
-                console.log('err', err)
-            })
             .finally(() => {
                 setLoading(false)
             })
     }
+
+    useEffect(() => {
+        const unsubscribe = dynamicLinks().onLink((link: any) => {
+            console.log('link11', link?.url)
+        })
+        return () => unsubscribe()
+    }, [])
+
+    useEffect(() => {
+        dynamicLinks()
+            .getInitialLink()
+            .then((link: any) => {
+                console.log('link2: ', link?.url)
+            })
+    }, [])
 
     useEffect(() => {
         getImageByCategory(currentCategoryFocus)
@@ -77,12 +90,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Constant.color.backgroundColor,
         paddingHorizontal: 20,
-        paddingVertical: 0
+        paddingVertical: 0,
     },
     imageItem: {
         marginRight: 20,
         marginTop: 20,
         width: (Constant.screen.width - 60) / 2,
-        borderRadius: 5
-    }
+        borderRadius: 5,
+    },
 })

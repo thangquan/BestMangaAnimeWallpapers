@@ -13,6 +13,7 @@ import com.bestmangaanimewallpapers.newarchitecture.MainApplicationReactNativeHo
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.microsoft.codepush.react.CodePush;
+import io.invertase.firebase.analytics.ReactNativeFirebaseAnalyticsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
