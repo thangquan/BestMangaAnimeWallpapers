@@ -317,6 +317,8 @@ dependencies {
     
     implementation project(path: ":@react-native-firebase_analytics")
     
+    implementation project(':react-native-in-app-review')
+    
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
     }

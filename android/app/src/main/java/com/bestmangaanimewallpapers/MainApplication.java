@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.microsoft.codepush.react.CodePush;
 import io.invertase.firebase.analytics.ReactNativeFirebaseAnalyticsPackage;
+import com.ibits.react_native_in_app_review.AppReviewPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -29,7 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
+          // packages.add(new AppReviewPackage());
           return packages;
         }
 
@@ -42,10 +43,12 @@ public class MainApplication extends Application implements ReactApplication {
         protected String getJSBundleFile() {
             return CodePush.getJSBundleFile();
         }
+
       };
 
   private final ReactNativeHost mNewArchitectureNativeHost =
       new MainApplicationReactNativeHost(this);
+      
 
   @Override
   public ReactNativeHost getReactNativeHost() {
@@ -55,6 +58,7 @@ public class MainApplication extends Application implements ReactApplication {
       return mReactNativeHost;
     }
   }
+
 
   @Override
   public void onCreate() {
