@@ -19,10 +19,18 @@ export default class Util {
         Toast.show({
             text1: i18n.t('common.notification'),
             text2: title,
-            visibilityTime: 1000
+            visibilityTime: 1000,
         })
     }
 
+    static showAlertError = (title) => {
+        Toast.show({
+            text1: i18n.t('common.notification'),
+            text2: title,
+            visibilityTime: 1200,
+            type: 'error',
+        })
+    }
     static hasLibraryPermission = async () => {
         if (this.isIOS()) {
             const result = await check(PERMISSIONS.IOS.PHOTO_LIBRARY)
@@ -34,12 +42,12 @@ export default class Util {
                     if (status === 'granted') return true
                     Alert.alert('Notification', 'Please grant library permission', [
                         {
-                            text: 'No'
+                            text: 'No',
                         },
                         {
                             text: 'YES',
-                            onPress: () => Linking.openSettings()
-                        }
+                            onPress: () => Linking.openSettings(),
+                        },
                     ])
                     return false
             }
@@ -54,12 +62,12 @@ export default class Util {
         if (status === 'granted') return true
         Alert.alert('Notification', 'Please grant library permission', [
             {
-                text: 'No'
+                text: 'No',
             },
             {
                 text: 'YES',
-                onPress: () => Linking.openSettings()
-            }
+                onPress: () => Linking.openSettings(),
+            },
         ])
         return false
     }
@@ -100,7 +108,7 @@ export default class Util {
             w: 7 * 24 * 60 * 60 * 1000,
             d: 24 * 60 * 60 * 1000,
             h: 60 * 60 * 1000,
-            m: 60 * 1000
+            m: 60 * 1000,
         }
         let diff = Date.now() - created
 
