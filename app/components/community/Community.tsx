@@ -60,24 +60,26 @@ const Community = (props: Props) => {
     const renderItem = ({ item }: { item: PostModel }) => <Post dataPost={item} />
 
     const onEndReached = (): void => {
-        let query = firestore()
+        var query = firestore()
             .collection(Constant.collection.posts)
             .orderBy('data.created', 'desc')
-        if (lastDocument !== undefined) {
+        if (lastDocument) {
             query = query.startAfter(lastDocument)
         }
         query
             .limit(5)
             .get()
             .then(async (querySnapshot: any) => {
-                setLastDocument(querySnapshot.docs[querySnapshot.docs.length - 1])
-                let listPost = await Promise.all(
-                    querySnapshot.docs.map(async (i: any) => {
-                        let user = await FirebaseAPIs.getInfoUser(i._data.idUser)
-                        return new PostModel({ ...i._data, user })
-                    })
-                )
-                setDataPost((prev) => prev?.concat(listPost))
+                if (querySnapshot.docs.length) {
+                    setLastDocument(querySnapshot.docs[querySnapshot.docs.length - 1])
+                    let listPost = await Promise.all(
+                        querySnapshot.docs.map(async (i: any) => {
+                            let user = await FirebaseAPIs.getInfoUser(i._data.idUser)
+                            return new PostModel({ ...i._data, user })
+                        })
+                    )
+                    setDataPost((prev) => prev?.concat(listPost))
+                }
             })
     }
 

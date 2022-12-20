@@ -33,10 +33,11 @@ const ImageDetail = () => {
                     imageWidth={wp(100)}
                     imageHeight={hp(100)}
                 >
-                    <Image
+                    <FastImage
                         source={{
                             uri: imageUrl
                         }}
+                        resizeMode={'contain'}
                         style={styles.image}
                     />
                 </ImageZoom>
