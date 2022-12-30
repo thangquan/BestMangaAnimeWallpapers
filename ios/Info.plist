@@ -53,7 +53,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) uses library</string>
+	<string>$(PRODUCT_NAME) uses library to save downloaded images </string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
