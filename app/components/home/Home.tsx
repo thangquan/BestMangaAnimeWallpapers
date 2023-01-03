@@ -1,6 +1,6 @@
 import dynamicLinks from '@react-native-firebase/dynamic-links'
 import React, { useEffect, useState } from 'react'
-import { FlatList, SafeAreaView, StyleSheet, View } from 'react-native'
+import { FlatList, Platform, SafeAreaView, StyleSheet, View } from 'react-native'
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import { useSelector } from 'react-redux'
 import CommonAPIs from '../../controller/APIs/CommonAPIs'
@@ -12,6 +12,11 @@ import Loading from './../common/Loading'
 import ListCategory from './ListCategory'
 
 type Props = {}
+
+const items: any = Platform.select({
+    ios: [],
+    android: ['vip1'],
+})
 
 const Home = (props: Props) => {
     const [data, setData] = useState<any[]>([])
