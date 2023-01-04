@@ -5,6 +5,7 @@ import Constant from '../../controller/Constant'
 import DrawerContent from '../drawerContent/DrawerContent'
 import TabBarNavigation from './TabBarNavigation'
 import Home from '../home/Home'
+import PaymentVIP from '../PaymentVIP/PaymentVIP'
 // import TabBarNavigation from './TabBarNavigation'
 
 const Drawer = createDrawerNavigator()

@@ -1,35 +1,32 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, SafeAreaView } from 'react-native'
+import { DrawerActions, useNavigation } from '@react-navigation/native'
 import React from 'react'
-import Constant from './../../controller/Constant'
-import { useDispatch, useSelector } from 'react-redux'
-import { updateCurrentFocused } from './../../redux/categorySlice'
-import {
-    useNavigation,
-    DrawerActions,
-    NavigationProp,
-    StackActions
-} from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
+import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import AnimatedLinearGradient, { presetColors } from 'react-native-animated-linear-gradient'
+import { useDispatch, useSelector } from 'react-redux'
+import Constant from './../../controller/Constant'
+import { updateCurrentFocused } from './../../redux/categorySlice'
 
 type Props = {}
 
 const DrawerContent = (props: Props) => {
     const dispatch = useDispatch()
-    const navigation = useNavigation()
+    const navigation = useNavigation<any>()
     const currentCategoryFocus = useSelector((state: any) => state.categorySlice?.currentFocused)
     const { t: lang } = useTranslation()
+
     const renderItem = ({ item, index }: { item: string; index: number }) => {
         return (
             <TouchableOpacity
                 style={{
                     ...styles.itemCategory,
                     backgroundColor:
-                        currentCategoryFocus == item ? Constant.color.yellow : 'transparent'
+                        currentCategoryFocus == item ? Constant.color.yellow : 'transparent',
                 }}
                 onPress={() => {
                     handleOnPressItemCategory({
                         data: item,
-                        index
+                        index,
                     })
                 }}
             >
@@ -39,7 +36,7 @@ const DrawerContent = (props: Props) => {
                         color:
                             currentCategoryFocus == item
                                 ? Constant.color.backgroundColor
-                                : Constant.color.text
+                                : Constant.color.text,
                     }}
                 >
                     {item}
@@ -57,7 +54,7 @@ const DrawerContent = (props: Props) => {
         <SafeAreaView
             style={{
                 flex: 1,
-                backgroundColor: Constant.color.backgroundColor
+                backgroundColor: Constant.color.backgroundColor,
             }}
         >
             <View style={styles.drawerContent}>
@@ -89,6 +86,15 @@ const DrawerContent = (props: Props) => {
                 >
                     <Text style={styles.textPrivacy}>{lang('profile.terms')}</Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.btnVIP}
+                    onPress={() => {
+                        navigation.navigate(Constant.screenName.PaymentVIP)
+                    }}
+                >
+                    <AnimatedLinearGradient customColors={presetColors.firefox} speed={500} />
+                    <Text style={styles.textVip}>Subscriptions Vip</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
@@ -99,14 +105,14 @@ export default DrawerContent
 const styles = StyleSheet.create({
     drawerContent: {
         flex: 1,
-        backgroundColor: Constant.color.backgroundColor
+        backgroundColor: Constant.color.backgroundColor,
     },
     title: {
         marginVertical: 20,
         fontSize: 26,
         fontFamily: Constant.fonts.robotoSlabSemiBold,
         color: Constant.color.text,
-        textAlign: 'center'
+        textAlign: 'center',
     },
     itemCategory: {
         borderWidth: 0.33,
@@ -115,28 +121,42 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         borderRadius: 10,
         paddingHorizontal: 20,
-        paddingVertical: 10
+        paddingVertical: 10,
     },
     textTitleCategory: {
         fontSize: 16,
         color: Constant.color.text,
-        fontFamily: Constant.fonts.robotoSlabSemiBold
+        fontFamily: Constant.fonts.robotoSlabSemiBold,
     },
     privacy: {
         marginHorizontal: 20,
-        paddingVertical: 10
+        paddingVertical: 10,
     },
     btnPrivacy: {
         paddingVertical: 10,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
     },
     textPrivacy: {
         color: Constant.color.text,
-        fontFamily: Constant.fonts.robotoSlabRegular
+        fontFamily: Constant.fonts.robotoSlabRegular,
     },
     driver: {
         height: 0.5,
         marginHorizontal: 10,
-        backgroundColor: Constant.color.text
-    }
+        backgroundColor: Constant.color.text,
+    },
+    btnVIP: {
+        height: 40,
+        overflow: 'hidden',
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        justifyContent: 'center',
+        marginHorizontal: 40,
+        marginVertical: 10,
+    },
+    textVip: {
+        color: '#fff',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
 })
