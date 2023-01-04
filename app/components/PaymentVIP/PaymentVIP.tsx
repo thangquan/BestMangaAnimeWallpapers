@@ -9,14 +9,15 @@ import RNIap, {
     withIAPContext,
 } from 'react-native-iap'
 import AnimatedLinearGradient, { presetColors } from 'react-native-animated-linear-gradient'
+import { useNavigation } from '@react-navigation/native'
 
 const itemsProducts: any = Platform.select({
-    ios: [],
+    ios: ['coin0'],
     android: ['coin0', 'coin1', 'coin2', 'coin3', 'coin4', 'coin5'],
 })
 
 const itemsSubscriptions: any = Platform.select({
-    ios: [],
+    ios: ['coin0'],
     android: ['paisen', 'vip1', 'thang'],
 })
 
@@ -59,11 +60,7 @@ const PaymentVIP = () => {
     }
 
     return (
-        <SafeAreaView
-            style={{
-                flex: 1,
-            }}
-        >
+        <SafeAreaView style={styles.container}>
             <View style={styles.container}>
                 <HeaderDefault title={'Payment VIP'} />
                 {products.map((product, index) => {

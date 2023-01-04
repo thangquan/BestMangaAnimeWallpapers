@@ -89,6 +89,7 @@ const DrawerContent = (props: Props) => {
                 <TouchableOpacity
                     style={styles.btnVIP}
                     onPress={() => {
+                        navigation.dispatch(DrawerActions.toggleDrawer())
                         navigation.navigate(Constant.screenName.PaymentVIP)
                     }}
                 >
