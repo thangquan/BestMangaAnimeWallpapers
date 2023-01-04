@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Constant from './../../controller/Constant'
 import { updateCurrentFocused } from './../../redux/categorySlice'
 import StorageManager from '../../controller/StorageManager'
+import { updateRoleUser } from '../../redux/userSlice'
 
 type Props = {}
 
@@ -15,7 +16,7 @@ const DrawerContent = (props: Props) => {
     const navigation = useNavigation<any>()
     const currentCategoryFocus = useSelector((state: any) => state.categorySlice?.currentFocused)
     const { t: lang } = useTranslation()
-    const [role, setRole] = useState<any>(null)
+    const role = useSelector((state: any) => state.userSlice.role)
 
     const renderItem = ({ item, index }: { item: string; index: number }) => {
         return (
@@ -54,8 +55,9 @@ const DrawerContent = (props: Props) => {
 
     const getInitRole = async () => {
         let data = await StorageManager.getData('VIP')
-        setRole(data)
-        console.log('data: ', data)
+        if (data) {
+            dispatch(updateRoleUser(data))
+        }
     }
 
     useEffect(() => {

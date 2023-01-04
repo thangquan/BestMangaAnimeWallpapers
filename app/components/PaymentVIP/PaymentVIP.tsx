@@ -12,6 +12,8 @@ import AnimatedLinearGradient, { presetColors } from 'react-native-animated-line
 import { useNavigation } from '@react-navigation/native'
 import Util from '../../controller/Util'
 import StorageManager from '../../controller/StorageManager'
+import { createDispatchHook, useDispatch } from 'react-redux'
+import { updateRoleUser } from '../../redux/userSlice'
 
 const itemsProducts: any = Platform.select({
     ios: ['coin0', 'coin1', 'coin2', 'coin3', 'coin4', 'coin5'],
@@ -25,6 +27,7 @@ const itemsSubscriptions: any = Platform.select({
 
 const PaymentVIP = () => {
     const { connected, subscriptions, products, getProducts, getSubscriptions } = useIAP()
+    const dispatch = useDispatch()
 
     const getProductsAndPurchases = async () => {
         await getProducts({ skus: itemsProducts })
@@ -47,11 +50,11 @@ const PaymentVIP = () => {
     const handlePurchase = async (sku: any) => {
         if (Util.isAndroid()) {
             await requestPurchase({ skus: [sku.productId] }).then((res: any) => {
-                StorageManager.setData('VIP', sku)
+                dispatch(updateRoleUser(sku))
             })
         } else {
             await requestPurchase({ sku: sku.productId }).then((res: any) => {
-                StorageManager.setData('VIP', sku)
+                dispatch(updateRoleUser(sku))
             })
         }
     }

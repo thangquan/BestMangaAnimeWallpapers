@@ -6,11 +6,12 @@ import RNProgressHud from 'progress-hud'
 import StorageManager from '../controller/StorageManager'
 
 const userSlice = createSlice({
-    name: 'categorySlice',
+    name: 'userSlice',
     initialState: {
         data: new UserModel(null),
         modalLogin: false,
-        modalRegister: false
+        modalRegister: false,
+        role: null,
     },
     reducers: {
         updateCurrentUser: (state, action) => {
@@ -25,7 +26,11 @@ const userSlice = createSlice({
         logoutUser: (state, action: any) => {
             state.data = new UserModel(null)
             StorageManager.setData(Constant.keys.currentUser, null)
-        }
+        },
+        updateRoleUser: (state, action: any) => {
+            state.role = action.payload
+            StorageManager.setData('VIP', action.payload)
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -42,10 +47,15 @@ const userSlice = createSlice({
                 state.data = user
                 state.modalLogin = true
             })
-    }
+    },
 })
 
 const { reducer, actions } = userSlice
-export const { updateCurrentUser, updateStateModalLogin, updateStateModalRegister, logoutUser } =
-    actions
+export const {
+    updateCurrentUser,
+    updateStateModalLogin,
+    updateStateModalRegister,
+    logoutUser,
+    updateRoleUser,
+} = actions
 export default reducer
