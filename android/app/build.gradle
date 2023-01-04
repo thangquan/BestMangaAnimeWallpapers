@@ -152,8 +152,8 @@ android {
             dimension = 'version'
             resValue  "string","app_name","Waifu Pictures"
             resValue "string", "CodePushDeploymentKey", "RO2iXI67JxFCVFhLmuUx_4Dns0XhQ5GikSLK9"
-            versionCode 5
-            versionName "1.0.4"
+            versionCode 6
+            versionName "1.0.5"
         }
         prod {
             dimension =  'version'
