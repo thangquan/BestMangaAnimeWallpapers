@@ -11,6 +11,7 @@ import RNIap, {
 import AnimatedLinearGradient, { presetColors } from 'react-native-animated-linear-gradient'
 import { useNavigation } from '@react-navigation/native'
 import Util from '../../controller/Util'
+import StorageManager from '../../controller/StorageManager'
 
 const itemsProducts: any = Platform.select({
     ios: ['coin0', 'coin1', 'coin2', 'coin3', 'coin4', 'coin5'],
@@ -45,9 +46,13 @@ const PaymentVIP = () => {
 
     const handlePurchase = async (sku: any) => {
         if (Util.isAndroid()) {
-            await requestPurchase({ skus: [sku] }).then((res: any) => {})
+            await requestPurchase({ skus: [sku.productId] }).then((res: any) => {
+                StorageManager.setData('VIP', sku)
+            })
         } else {
-            await requestPurchase({ sku }).then((res: any) => {})
+            await requestPurchase({ sku: sku.productId }).then((res: any) => {
+                StorageManager.setData('VIP', sku)
+            })
         }
     }
 
@@ -81,7 +86,7 @@ const PaymentVIP = () => {
                             <TouchableOpacity
                                 key={product.productId}
                                 onPress={() => {
-                                    handlePurchase(product.productId)
+                                    handlePurchase(product)
                                 }}
                                 style={styles.btnItem}
                             >
