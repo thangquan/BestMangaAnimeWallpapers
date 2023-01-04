@@ -4,6 +4,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import Constant from '../../controller/Constant'
 import DrawerContent from '../drawerContent/DrawerContent'
 import TabBarNavigation from './TabBarNavigation'
+import Home from '../home/Home'
+import PaymentVIP from '../PaymentVIP/PaymentVIP'
 // import TabBarNavigation from './TabBarNavigation'
 
 const Drawer = createDrawerNavigator()
@@ -15,13 +17,10 @@ const DrawerNavigation = () => {
             drawerContent={(props) => <DrawerContent />}
             screenOptions={{
                 headerShown: false,
-                drawerType: 'front'
+                drawerType: 'front',
             }}
         >
-            <Drawer.Screen
-                name={Constant.screenName.TabBarNavigation}
-                component={TabBarNavigation}
-            />
+            <Drawer.Screen name={Constant.screenName.Home} component={Home} />
         </Drawer.Navigator>
     )
 }

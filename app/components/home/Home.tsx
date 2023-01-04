@@ -51,7 +51,7 @@ const Home = (props: Props) => {
         dynamicLinks()
             .getInitialLink()
             .then((link: any) => {
-                console.log('link2: ', link?.url)
+                // console.log('link2: ', link?.url)
             })
     }, [])
 

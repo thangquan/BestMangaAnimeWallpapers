@@ -19,6 +19,7 @@ import { updateCurrentUser } from '../../redux/userSlice'
 import UpdateProfile from '../updateProfile/UpdateProfile'
 import ChangeLanguage from '../changeLanguage/ChangeLanguage'
 import { useTranslation, UseTranslationOptions } from 'react-i18next'
+import PaymentVIP from '../PaymentVIP/PaymentVIP'
 
 type Props = {}
 
@@ -53,7 +54,7 @@ const RootNavigation = (props: Props) => {
         <NavigationContainer>
             <Stack.Navigator
                 screenOptions={{
-                    headerShown: false
+                    headerShown: false,
                 }}
                 initialRouteName={Constant.screenName.DrawerNavigation}
             >
@@ -70,6 +71,7 @@ const RootNavigation = (props: Props) => {
                     name={Constant.screenName.ChangeLanguage}
                     component={ChangeLanguage}
                 />
+                <Stack.Screen name={Constant.screenName.PaymentVIP} component={PaymentVIP} />
             </Stack.Navigator>
         </NavigationContainer>
     )

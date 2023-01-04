@@ -23,6 +23,7 @@ export default Constant = {
         Profile: 'Profile',
         UpdateProfile: 'UpdateProfile',
         ChangeLanguage: 'ChangeLanguage',
+        PaymentVIP: 'PaymentVIP',
     },
     color: {
         green: '#3FC44E',

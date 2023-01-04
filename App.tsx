@@ -27,6 +27,6 @@ export default codePush(App)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Constant.color.backgroundColor
-    }
+        backgroundColor: Constant.color.backgroundColor,
+    },
 })

@@ -7,7 +7,7 @@ import Header from './Header'
 import FastImage from 'react-native-fast-image'
 import {
     widthPercentageToDP as wp,
-    heightPercentageToDP as hp
+    heightPercentageToDP as hp,
 } from 'react-native-responsive-screen'
 import { RootRouteProps } from '../navigation/RootNavigation'
 import FooterIcon from './FooterIcon'
@@ -26,17 +26,18 @@ const ImageDetail = () => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>
             <View style={styles.container}>
-                <Header />
+                <Header reportImage={true} />
                 <ImageZoom
                     cropWidth={wp(100)}
                     cropHeight={hp(100)}
                     imageWidth={wp(100)}
                     imageHeight={hp(100)}
                 >
-                    <Image
+                    <FastImage
                         source={{
-                            uri: imageUrl
+                            uri: imageUrl,
                         }}
+                        resizeMode={'contain'}
                         style={styles.image}
                     />
                 </ImageZoom>
@@ -51,11 +52,11 @@ export default React.memo(ImageDetail)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Constant.color.backgroundColor
+        backgroundColor: Constant.color.backgroundColor,
     },
     image: {
         width: wp(100),
         height: hp(100),
-        resizeMode: 'contain'
-    }
+        resizeMode: 'contain',
+    },
 })

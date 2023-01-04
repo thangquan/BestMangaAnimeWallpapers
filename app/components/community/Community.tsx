@@ -51,10 +51,10 @@ const Community = (props: Props) => {
     const renderItem = ({ item }: { item: PostModel }) => <Post dataPost={item} />
 
     const onEndReached = (): void => {
-        let query = firestore()
+        var query = firestore()
             .collection(Constant.collection.posts)
             .orderBy('data.created', 'desc')
-        if (lastDocument !== undefined) {
+        if (lastDocument) {
             query = query.startAfter(lastDocument)
         }
         query
