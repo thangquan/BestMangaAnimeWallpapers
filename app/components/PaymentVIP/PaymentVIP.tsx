@@ -10,14 +10,15 @@ import RNIap, {
 } from 'react-native-iap'
 import AnimatedLinearGradient, { presetColors } from 'react-native-animated-linear-gradient'
 import { useNavigation } from '@react-navigation/native'
+import Util from '../../controller/Util'
 
 const itemsProducts: any = Platform.select({
-    ios: ['coin0'],
+    ios: ['coin0', 'coin1', 'coin2', 'coin3', 'coin4', 'coin5'],
     android: ['coin0', 'coin1', 'coin2', 'coin3', 'coin4', 'coin5'],
 })
 
 const itemsSubscriptions: any = Platform.select({
-    ios: ['coin0'],
+    ios: ['sub0'],
     android: ['paisen', 'vip1', 'thang'],
 })
 
@@ -27,23 +28,6 @@ const PaymentVIP = () => {
     const getProductsAndPurchases = async () => {
         await getProducts({ skus: itemsProducts })
         await getSubscriptions({ skus: itemsSubscriptions })
-    }
-
-    useEffect(() => {
-        if (connected) {
-            getProductsAndPurchases()
-        }
-    }, [connected])
-
-    const handlePurchase = async (sku: any) => {
-        console.log('sku', sku)
-        await requestPurchase({ skus: [sku] }).then((res: any) => {})
-        // await requestSubscription({
-        //     sku: sku,
-        //     subscriptionOffers: sku?.subscriptionOfferDetails[0],
-        // }).then((res: any) => {
-        //     console.log('res123123: ', res)
-        // })
     }
 
     const getColor = (index: number): void => {
@@ -59,37 +43,60 @@ const PaymentVIP = () => {
         }
     }
 
+    const handlePurchase = async (sku: any) => {
+        if (Util.isAndroid()) {
+            await requestPurchase({ skus: [sku] }).then((res: any) => {})
+        } else {
+            await requestPurchase({ sku }).then((res: any) => {})
+        }
+    }
+
+    const handleSub = async (sku: any) => {}
+
+    useEffect(() => {
+        if (connected) {
+            getProductsAndPurchases()
+        }
+    }, [connected])
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
                 <HeaderDefault title={'Payment VIP'} />
-                {products.map((product, index) => {
+                {products
+                    .sort((a: any, b: any) => a.price - b.price)
+                    .map((product: any, index) => {
+                        return (
+                            <TouchableOpacity
+                                key={product.productId}
+                                onPress={() => {
+                                    handlePurchase(product.productId)
+                                }}
+                                style={styles.btnItem}
+                            >
+                                <AnimatedLinearGradient
+                                    customColors={getColor(index)}
+                                    speed={500}
+                                />
+                                <Text style={styles.textItem}>
+                                    {product.name || product.title} ({product.localizedPrice})
+                                </Text>
+                            </TouchableOpacity>
+                        )
+                    })}
+                {/* {subscriptions.map((product: any, index) => {
                     return (
                         <TouchableOpacity
                             key={product.productId}
                             onPress={() => {
-                                handlePurchase(product.productId)
-                            }}
-                            style={styles.btnItem}
-                        >
-                            <AnimatedLinearGradient customColors={getColor(index)} speed={500} />
-                            <Text style={styles.textItem}>
-                                {product?.name} ({product.price})
-                            </Text>
-                        </TouchableOpacity>
-                    )
-                })}
-                {/* {subscriptions.map((product, index) => {
-                    return (
-                        <TouchableOpacity
-                            key={product.productId}
-                            onPress={() => {
-                                handlePurchase(product)
+                                handleSub(product)
                             }}
                             style={styles.btnItem}
                         >
                             <AnimatedLinearGradient customColors={getColor(index)} speed={1000} />
-                            <Text style={styles.textItem}>{product.title}</Text>
+                            <Text style={styles.textItem}>
+                                {product.title} ({product.localizedPrice})
+                            </Text>
                         </TouchableOpacity>
                     )
                 })} */}
