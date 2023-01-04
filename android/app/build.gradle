@@ -140,6 +140,7 @@ def reactNativeArchitectures() {
 }
 
 android {
+
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -151,8 +152,8 @@ android {
             dimension = 'version'
             resValue  "string","app_name","Waifu Pictures"
             resValue "string", "CodePushDeploymentKey", "RO2iXI67JxFCVFhLmuUx_4Dns0XhQ5GikSLK9"
-            versionCode 4
-            versionName "1.0.3"
+            versionCode 5
+            versionName "1.0.4"
         }
         prod {
             dimension =  'version'
@@ -167,6 +168,8 @@ android {
         applicationId "com.bestmangaanimewallpapers"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        missingDimensionStrategy "store", "play"
+
         // versionCode 2
         // versionName "1.0.1"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
@@ -317,6 +320,8 @@ dependencies {
     
     implementation project(path: ":@react-native-firebase_analytics")
     
+    implementation project(':react-native-iap')
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
     }
