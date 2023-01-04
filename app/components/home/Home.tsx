@@ -10,6 +10,8 @@ import LoadingFooter from '../common/LoadingFooter'
 import Constant from './../../controller/Constant'
 import Loading from './../common/Loading'
 import ListCategory from './ListCategory'
+import { useBackHandler } from '@react-native-community/hooks'
+import InAppReview from 'react-native-in-app-review'
 
 type Props = {}
 
@@ -18,6 +20,7 @@ const Home = (props: Props) => {
     const [listCategory, setListCategory] = useState<any[]>(Constant.categories)
     const [loading, setLoading] = useState<boolean>(false)
     const currentCategoryFocus = useSelector((state: any) => state.categorySlice?.currentFocused)
+    const [isReview, setIsReview] = useState<boolean>(false)
 
     const onEndReached = (): void => {
         CommonAPIs.getImageByCategory(currentCategoryFocus)
@@ -58,6 +61,20 @@ const Home = (props: Props) => {
     useEffect(() => {
         getImageByCategory(currentCategoryFocus)
     }, [currentCategoryFocus])
+
+    const checkReviewApp = async (): Promise<void> => {
+        const hasFlowFinishedSuccessfully = await InAppReview.RequestInAppReview()
+        setIsReview(hasFlowFinishedSuccessfully)
+    }
+
+    useBackHandler(() => {
+        if (!isReview) {
+            checkReviewApp()
+            return true
+        } else {
+            return false
+        }
+    })
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Constant.color.backgroundColor }}>

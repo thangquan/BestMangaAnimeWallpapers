@@ -320,6 +320,8 @@ dependencies {
     
     implementation project(path: ":@react-native-firebase_analytics")
     
+    implementation project(':react-native-in-app-review')
+    
     implementation project(':react-native-iap')
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
