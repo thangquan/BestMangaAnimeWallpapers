@@ -51,7 +51,18 @@ const PaymentVIP = () => {
         }
     }
 
-    const handleSub = async (sku: any) => {}
+    const handleSub = async (sku: any) => {
+        if (Util.isAndroid() || true) {
+            let offerToken: string = sku.subscriptionOfferDetails
+                ? sku.subscriptionOfferDetails[0].offerToken
+                : ''
+            await requestSubscription({
+                sku: sku.productId,
+                subscriptionOffers: [{ sku: sku.productId, offerToken }],
+            }).then((res: any) => {})
+        } else {
+        }
+    }
 
     useEffect(() => {
         if (connected) {
@@ -94,9 +105,7 @@ const PaymentVIP = () => {
                             style={styles.btnItem}
                         >
                             <AnimatedLinearGradient customColors={getColor(index)} speed={1000} />
-                            <Text style={styles.textItem}>
-                                {product.title} ({product.localizedPrice})
-                            </Text>
+                            <Text style={styles.textItem}>{product.title}</Text>
                         </TouchableOpacity>
                     )
                 })} */}
