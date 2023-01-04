@@ -12,7 +12,7 @@ import AnimatedLinearGradient, { presetColors } from 'react-native-animated-line
 
 const itemsProducts: any = Platform.select({
     ios: [],
-    android: ['coin1', 'coin2', 'coin3', 'coin4', 'coin5'],
+    android: ['coin0', 'coin1', 'coin2', 'coin3', 'coin4', 'coin5'],
 })
 
 const itemsSubscriptions: any = Platform.select({
