@@ -1,11 +1,13 @@
 import { DrawerActions, useNavigation } from '@react-navigation/native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import AnimatedLinearGradient, { presetColors } from 'react-native-animated-linear-gradient'
 import { useDispatch, useSelector } from 'react-redux'
 import Constant from './../../controller/Constant'
 import { updateCurrentFocused } from './../../redux/categorySlice'
+import StorageManager from '../../controller/StorageManager'
+import { updateRoleUser } from '../../redux/userSlice'
 
 type Props = {}
 
@@ -14,6 +16,7 @@ const DrawerContent = (props: Props) => {
     const navigation = useNavigation<any>()
     const currentCategoryFocus = useSelector((state: any) => state.categorySlice?.currentFocused)
     const { t: lang } = useTranslation()
+    const role = useSelector((state: any) => state.userSlice.role)
 
     const renderItem = ({ item, index }: { item: string; index: number }) => {
         return (
@@ -50,6 +53,17 @@ const DrawerContent = (props: Props) => {
         dispatch(updateCurrentFocused(item))
     }
 
+    const getInitRole = async () => {
+        let data = await StorageManager.getData('VIP')
+        if (data) {
+            dispatch(updateRoleUser(data))
+        }
+    }
+
+    useEffect(() => {
+        getInitRole()
+    }, [])
+
     return (
         <SafeAreaView
             style={{
@@ -59,6 +73,11 @@ const DrawerContent = (props: Props) => {
         >
             <View style={styles.drawerContent}>
                 <Text style={styles.title}>Waifu Pictures</Text>
+                {role ? (
+                    <Text style={styles.textRole}>❤️ {role?.name || role?.title} ❤️</Text>
+                ) : (
+                    <Text />
+                )}
                 <FlatList
                     data={Constant.categories}
                     keyExtractor={(item) => item}
@@ -109,7 +128,7 @@ const styles = StyleSheet.create({
         backgroundColor: Constant.color.backgroundColor,
     },
     title: {
-        marginVertical: 20,
+        marginTop: 20,
         fontSize: 26,
         fontFamily: Constant.fonts.robotoSlabSemiBold,
         color: Constant.color.text,
@@ -159,5 +178,11 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: 'bold',
         textAlign: 'center',
+    },
+    textRole: {
+        marginBottom: 10,
+        textAlign: 'center',
+        fontFamily: Constant.fonts.robotoSlabSemiBold,
+        color: Constant.color.text,
     },
 })
